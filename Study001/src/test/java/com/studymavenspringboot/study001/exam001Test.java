@@ -1,5 +1,6 @@
 package com.studymavenspringboot.study001;
 
+import com.studymavenspringboot.study001.mathExam.MathExam;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -11,6 +12,7 @@ public class exam001Test {
     public void subtract001() throws Exception{
         assertThat(1001).isGreaterThan(1000);
         //given     테스트하기 위한 준비 동작
+        MathExam math = new MathExam();
         // int num1 = -50001;
         // int num2 = 3;
         // int expected = -50004;
@@ -27,20 +29,11 @@ public class exam001Test {
         //      assertThat(actual).isEqualTo(expected).describedAs("실제값과 다름");
 
          */
-        assertThatThrownBy(() -> subTest001(70000, 7))
+        assertThatThrownBy(() -> math.subTest001(70000, 7))
                 .isInstanceOf(Exception.class);
         Throwable exception = assertThrows(RuntimeException.class, () -> {
-                subTest001(2330, 50002);
+                math.subTest001(2330, 50002);
         });
         System.out.println(exception.toString());
-    }
-    int subTest001(int n1, int n2) throws Exception{
-        if( n1 < -50000 || n1 > 50000){
-            throw new Exception("num1 값은 -50001보다 작거나 num1 값은 50000보다 큽니다");
-        }
-        if( n2 < -50000 || n2 > 50000){
-            throw new RuntimeException("num2 값은 -50001보다 작거나 num2 값은 50000보다 큽니다");
-        }
-        return n1 - n2;
     }
 }
