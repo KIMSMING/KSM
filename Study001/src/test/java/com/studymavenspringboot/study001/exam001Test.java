@@ -37,9 +37,7 @@ public class exam001Test {
         Throwable exception = assertThrows(RuntimeException.class, () -> {
                 math.subTest001(2330, 50002);
         });
-        System.out.println(exception.toString());
     }
-    @Test
     public void multiply001() throws Exception{
         // given
         MathExam math = new MathExam();
@@ -53,9 +51,24 @@ public class exam001Test {
                 .isInstanceOf(Exception.class);
         assertThatThrownBy(() -> math.mathTest002(-1, 10))
                 .isInstanceOf(Exception.class);
-        
-        
-    }
 
+
+    }
+    public void comparison() throws Exception{
+        //given
+        MathExam math = new MathExam();
+
+        //when
+
+        //then
+        assertThat(-1).isEqualTo(math.mathTest002(2,3));
+        assertThat(1).isEqualTo(math.mathTest002(11,11));
+        assertThat(-1).isEqualTo(math.mathTest002(7,99));
+        assertThatThrownBy(() -> math.mathTest003(-1, 10))
+                .isInstanceOf(Exception.class);
+        assertThatThrownBy(() -> math.mathTest003(-1, 10))
+                .isInstanceOf(Exception.class);
+
+    }
 
 }
