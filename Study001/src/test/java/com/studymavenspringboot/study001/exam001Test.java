@@ -1,7 +1,10 @@
 package com.studymavenspringboot.study001;
 
 import com.studymavenspringboot.study001.mathExam.MathExam;
+import org.assertj.core.api.Assert;
 import org.junit.jupiter.api.Test;
+
+import java.util.function.Predicate;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -36,4 +39,23 @@ public class exam001Test {
         });
         System.out.println(exception.toString());
     }
+    @Test
+    public void multiply001() throws Exception{
+        // given
+        MathExam math = new MathExam();
+
+        // when
+
+        // then
+        assertThat(12).isEqualTo(math.mathTest002(3,4));
+        assertThat(513).isEqualTo(math.mathTest002(27, 19));
+        assertThatThrownBy(() -> math.mathTest002(-1, 10))
+                .isInstanceOf(Exception.class);
+        assertThatThrownBy(() -> math.mathTest002(-1, 10))
+                .isInstanceOf(Exception.class);
+        
+        
+    }
+
+
 }
