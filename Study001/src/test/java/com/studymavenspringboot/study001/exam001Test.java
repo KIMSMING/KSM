@@ -121,5 +121,27 @@ public class exam001Test {
         Throwable ex2 = assertThrows(Exception.class, () -> math.exam120831(1001));
         System.out.println(ex2.toString());
     }
-
+    @Test
+    public void exam120583() throws Exception{
+        System.out.println("exam120583");
+        MathExam math = new MathExam();
+        assertThat(math.exam120583(new int[]{1, 1, 2, 3, 4, 5}, 1)).isEqualTo(2);
+        assertThat(math.exam120583(new int[]{0, 2, 3, 4}, 1)).isEqualTo(0);
+        Throwable exception = assertThrows(Exception.class, () -> {
+            math.exam120583(new int[]{0, 1000, 2000}, 12);
+        });
+    }
+    public void exam120813() throws Exception{
+        System.out.println("exam120813");
+        MathExam math = new MathExam();
+        assertThat(math.exam120813(10)).isEqualTo((new int[]{1, 3, 5, 7, 9}));
+        assertThat(math.exam120813(15)).isEqualTo((new int[]{1, 3, 5, 7, 9, 11, 13, 15}));
+    }
+    @Test
+    public void exam120819() throws Exception{
+        System.out.println("exam120819");
+        MathExam math = new MathExam();
+        assertThat(math.exam120819(5500)).isEqualTo((new int[]{1, 0}));
+        assertThat(math.exam120819(15000)).isEqualTo((new int[]{2, 4000}));
+    }
 }

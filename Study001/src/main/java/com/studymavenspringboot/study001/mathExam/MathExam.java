@@ -81,8 +81,8 @@ public class MathExam {
         }
     }
     public int exam120831(int n) throws Exception{
-        if ( n <= 0 || n > 1000){
-            throw new Exception("n은 0보다 크고 1000보다 작거나 같아야합니다");
+        if ( n <= 1|| n > 1000){
+            throw new Exception("n은 1보다 크고 1000보다 작거나 같아야합니다");
         }
         int sum = 0;
         for(int i = 2; i<=n; i+=2){
@@ -90,5 +90,46 @@ public class MathExam {
         }
         return sum;
     }
-
+    public int exam120583(int[] array, int n) throws Exception{
+        int count = 0;
+        if ( n < 0 || n > 1000 ){
+            throw new Exception("n은 0보다 크거나 같고 1000보다 작거나 같아야합니다");
+        }
+        if ( array.length < 1 || array.length > 100){
+            throw new Exception("array배열의 길이는 1~100사이여야합니다");
+        }
+        for (int i = 0; i < array.length; i++){
+            if (array[i] < 0 || array[i] > 1000 ){
+                throw new Exception("array배열의 값은 1~1000사이여야합니다");
+            }
+            if (array[i] == n){
+                count++;
+            }
+        }
+        return count;
+    }
+    public int[] exam120813(int num) throws Exception{
+        int length = (num + 1) / 2;
+        int[] k = new int[length];
+        if ( num < 1 || num > 100 ){
+            throw new Exception("n은 1보다 크거나 같고 100보다 작거나 같아야합니다");
+        }
+        int ord = 1;
+        for (int i = 0; i < length; i ++) {
+            k[i] = ord;
+            ord += 2;
+        }
+        return k;
+    }
+    public int[] exam120819(int money) throws Exception{
+        if(money <= 0 || money > 1000000){
+            throw new Exception("money은 0보다 크고 1000000보다 작거나 같아야합니다");
+        }
+        int count = money / 5500;
+        int change = money % 5500;
+        int[] k = new int[2];
+        k[0] = count;
+        k[1] = change;
+        return k;
+    }
 }
