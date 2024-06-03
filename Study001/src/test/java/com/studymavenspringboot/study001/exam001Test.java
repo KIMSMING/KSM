@@ -44,8 +44,8 @@ public class exam001Test {
         // when
 
         // then
-        assertThat(12).isEqualTo(math.mathTest002(3,4));
-        assertThat(513).isEqualTo(math.mathTest002(27, 19));
+        assertThat(math.mathTest002(3,4)).isEqualTo(12);
+        assertThat(math.mathTest002(27, 19)).isEqualTo(513);
         assertThatThrownBy(() -> math.mathTest002(-1, 10))
                 .isInstanceOf(Exception.class);
         assertThatThrownBy(() -> math.mathTest002(-1, 10))
@@ -60,9 +60,9 @@ public class exam001Test {
         //when
 
         //then
-        assertThat(-1).isEqualTo(math.mathTest002(2,3));
-        assertThat(1).isEqualTo(math.mathTest002(11,11));
-        assertThat(-1).isEqualTo(math.mathTest002(7,99));
+        assertThat(math.mathTest002(2,3)).isEqualTo(-1);
+        assertThat(math.mathTest002(11,11)).isEqualTo(1);
+        assertThat(math.mathTest002(7,99)).isEqualTo(-1);
         assertThatThrownBy(() -> math.mathTest003(-1, 10))
                 .isInstanceOf(Exception.class);
         assertThatThrownBy(() -> math.mathTest003(-1, 10))
@@ -73,8 +73,8 @@ public class exam001Test {
     @Test
     public void exam120817() throws Exception {
         MathExam math = new MathExam();
-        assertThat(5.5).isEqualTo(math.exam120817(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}));
-        assertThat(94.0).isEqualTo(math.exam120817(new int[]{89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99}));
+        assertThat(math.exam120817(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10})).isEqualTo(5.5);
+        assertThat(math.exam120817(new int[]{89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99})).isEqualTo(94.0);
         //  assertThatThrownBy(() -> math.exam120817(new int[] {0, 1000, 2000}))
         //         .isInstanceOf(Exception.class);
 
