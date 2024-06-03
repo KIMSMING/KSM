@@ -20,7 +20,7 @@ public class MathExam {
         }
         return num1 * num2;
     }
-    public int mathTest003( int n1, int n2) throws Exception {
+    public int mathTest120807(int n1, int n2) throws Exception {
         if ( n1 >= 0 || n1 <= 10000 ){
             throw new Exception("num1 값은 0~10000 사이의 값 이어야 합니다");
         }
@@ -80,4 +80,15 @@ public class MathExam {
             throw new Exception("angle는 1 ~ 180 이어야합니다");
         }
     }
+    public int exam120831(int n) throws Exception{
+        if ( n <= 0 || n > 1000){
+            throw new Exception("n은 0보다 크고 1000보다 작거나 같아야합니다");
+        }
+        int sum = 0;
+        for(int i = 2; i<=n; i+=2){
+            sum += i;
+        }
+        return sum;
+    }
+
 }
