@@ -54,4 +54,13 @@ public class MathExam {
 
         return A;
     }
+    public int exam120820( int age ) throws Exception{
+        if ( age <= 0 || age > 120 ){
+            throw new Exception("age는 0보다 크고 120보다 작거나 같아야합니다");
+        }
+        int year = 2022;
+        int ans = year - age + 1;
+
+        return ans;
+    }
 }

@@ -71,7 +71,7 @@ public class exam001Test {
 
     }
 
-    @Test
+
     public void exam120817() throws Exception {
         MathExam math = new MathExam();
         assertThat(math.exam120817(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10})).isEqualTo(5.5);
@@ -87,5 +87,17 @@ public class exam001Test {
         //         .isInstanceOf(Exception.class);
         exception = assertThrows(Exception.class, () -> math.exam120817(new int[] {}));
         System.out.println(exception.toString());
+    }
+    @Test
+    public void exam120820() throws Exception{
+        System.out.println("exam120820");
+        MathExam math = new MathExam();
+        assertThat(math.exam120820(40)).isEqualTo(1983);
+        assertThat(math.exam120820(23)).isEqualTo(2000);
+
+        Throwable ex1 = assertThrows(Exception.class, () -> math.exam120820(0));
+        System.out.println(ex1.toString());
+        Throwable ex2 = assertThrows(Exception.class, () -> math.exam120820(121));
+        System.out.println(ex2.toString());
     }
 }
