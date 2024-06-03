@@ -36,5 +36,23 @@ public class MathExam {
         }
         return result;
     }
+    public double exam120817( int[] numbers ) throws Exception{
+        if ( numbers == null ){
+            throw new Exception("numbers는 null이 아니어야 합니다.");
+        }
+        if ( numbers.length < 1 || numbers.length > 100 ){
+            throw new Exception("numbers 배열의 크기는 1 ~ 100개 사이어야 합니다.");
+        }
+        double sum = 0.0d;
+        for(int i = 0;  i < numbers.length; i++){
+            if ( numbers[i] < 0 || numbers[i] > 1000){
+                throw new Exception("numbers[%d] 배열의 값은 0~1000 사이어야 합니다.");
 
+            }
+            sum += numbers[i];
+        }
+        double A = sum / numbers.length;
+
+        return A;
+    }
 }

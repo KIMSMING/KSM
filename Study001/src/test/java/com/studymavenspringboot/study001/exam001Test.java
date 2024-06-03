@@ -11,7 +11,6 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class exam001Test {
-    @Test
     public void subtract001() throws Exception{
         assertThat(1001).isGreaterThan(1000);
         //given     테스트하기 위한 준비 동작
@@ -71,4 +70,10 @@ public class exam001Test {
 
     }
 
+    @Test
+    public void exam120817() throws Exception {
+        MathExam math = new MathExam();
+        assertThat(5.5).isEqualTo(math.exam120817(new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }));
+        assertThat(94.0).isEqualTo(math.exam120817(new int[] { 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99 }));
+    }
 }
