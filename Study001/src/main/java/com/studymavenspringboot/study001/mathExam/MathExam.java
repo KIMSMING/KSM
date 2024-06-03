@@ -47,7 +47,6 @@ public class MathExam {
         for(int i = 0;  i < numbers.length; i++){
             if ( numbers[i] < 0 || numbers[i] > 1000){
                 throw new Exception("numbers[%d] 배열의 값은 0~1000 사이어야 합니다.");
-
             }
             sum += numbers[i];
         }
