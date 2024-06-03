@@ -1,24 +1,24 @@
 package com.studymavenspringboot.study001.mathExam;
 
 public class MathExam {
-    public int subTest001(int n1, int n2) throws Exception {
-        if (n1 < -50000 || n1 > 50000) {
+    public int exam120803(int num1, int num2) throws Exception {
+        if (num1 < -50000 || num1 > 50000) {
             throw new Exception("num1값은  -50000보다 작거나, num1값은 5000보다 큽니다");
         }
-        if (n2 < -50000 || n2 > 50000) {
+        if (num2 < -50000 || num2 > 50000) {
             throw new RuntimeException("num2값은  -50000보다 작거나, num2값은 5000보다 큽니다");
         }
-        return n1 - n2;
+        return num1 - num2;
     }
 
-    public int mathTest002( int n1, int n2) throws Exception {
-        if ( n1 < 0 || n1 > 100 ){
+    public int exam120804(int num1, int num2) throws Exception {
+        if ( num1 < 0 || num1 > 100 ){
             throw new Exception("num1 값은 0 ~ 100 사이의 값 이어야 합니다");
         }
-        if ( n2 < 0 || n2 > 100 ){
+        if ( num2 < 0 || num2 > 100 ){
             throw new Exception("num2 값은 0 ~ 100 사이의 값 이어야 합니다.");
         }
-        return n1 * n2;
+        return num1 * num2;
     }
     public int mathTest003( int n1, int n2) throws Exception {
         if ( n1 >= 0 || n1 <= 10000 ){
@@ -62,5 +62,22 @@ public class MathExam {
         int ans = year - age + 1;
 
         return ans;
+    }
+    public int exam120829(int angle) throws Exception{
+        if ( angle > 0 && angle < 90 ){
+            return 1;
+        }
+        else if ( angle == 90 ){
+            return 2;
+        }
+        else if ( angle > 90 && angle < 180 ){
+            return 3;
+        }
+        else if ( angle == 180 ){
+            return 4;
+        }
+        else{
+            throw new Exception("angle는 1 ~ 180 이어야합니다");
+        }
     }
 }
