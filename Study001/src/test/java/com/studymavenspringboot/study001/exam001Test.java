@@ -23,10 +23,10 @@ public class exam001Test {
         // int actual = subTest001(num1, num2);
 
         //then      실체값과 기대값을 비교해서 테스트 한다
-        /*assertThat(-1).isEqualTo(subTest001(2,3));
-        assertThat(98).isEqualTo(subTest001(100, 2));
-        assertThat(3).isEqualTo(subTest001(10, 7));
-        assertThat(10).isLessThan(subTest001(100, 70));
+        /*assertThat(subTest001(2,3)).isEqualTo(-1);
+        assertThat(subTest001(100, 2)).isEqualTo(98);
+        assertThat(subTest001(10, 7)).isEqualTo(3);
+        assertThat(subTest001(100, 70)).isGreatThan(10);
         assertThat(32).isGreaterThan(subTest001(100, 70));
         //      assertThat(actual).isEqualTo(expected).describedAs("실제값과 다름");
 
