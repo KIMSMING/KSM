@@ -134,8 +134,8 @@ public class MathExam {
     }
     public int exam120585(int[] array, int height) throws Exception{
         int count = 0;
-        if (array.length < 1 || array.length > 100){
-            throw new Exception("array의 길이는 1보다 크거나 같고 100보다 작거나 같아야 합니다");
+        if (array == null || array.length < 1 || array.length > 100){
+            throw new Exception("array는 null이 아니며, array의 길이는 1보다 크거나 같고 100보다 작거나 같아야 합니다");
         }
         if (height < 1 || height > 200){
             throw new Exception("height는 1보다 크거나 같고 200보다 크거나 같아야 합니다");
@@ -150,5 +150,15 @@ public class MathExam {
         }
         return count;
     }
-
+    public int exam120837(int hp) throws Exception{
+        if ( hp < 1 || hp > 1000 ){
+            throw new Exception("hp는 자연수이며 1000보다 작거나 같아야합니다");
+        }
+        int a, b, c;
+        a = hp / 5 ;
+        b = a / 3 ;
+        c = a % 3;
+        int hap = a + b + c;
+        return hap;
+    }
 }

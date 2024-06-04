@@ -157,6 +157,19 @@ public class exam001Test {
 
         assertThat(math.exam120585(new int[]{149, 180, 192, 170}, 167)).isEqualTo(3);
         assertThat(math.exam120585(new int[]{180, 120, 140}, 190)).isEqualTo(0);
+    }
 
+    @Test
+    public void exam120837() throws Exception{
+        System.out.println("exam120837");
+        MathExam math = new MathExam();
+        Throwable ex1 = assertThrows(Exception.class, () -> math.exam120837(-1));
+        System.out.println(ex1.toString());
+        Throwable ex2 = assertThrows(Exception.class, () -> math.exam120837(1001));
+        System.out.println(ex2.toString());
+
+        assertThat(math.exam120837(23)).isEqualTo(5);
+        assertThat(math.exam120837(24)).isEqualTo(6);
+        assertThat(math.exam120837(999)).isEqualTo(201);
     }
 }
