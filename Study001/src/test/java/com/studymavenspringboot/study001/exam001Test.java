@@ -172,4 +172,17 @@ public class exam001Test {
         assertThat(math.exam120837(24)).isEqualTo(6);
         assertThat(math.exam120837(999)).isEqualTo(201);
     }
+
+    @Test
+    public void exam120818() throws Exception{
+        System.out.println("exam120818");
+        MathExam math=new MathExam();
+
+        assertThat(math.exam120818(150000)).isEqualTo(142500);
+        assertThat(math.exam120818(580000)).isEqualTo(464000);
+        Throwable exception = assertThrows(Exception.class, () ->math.exam120818(1200000));
+        System.out.println(exception.toString());
+        Throwable exception2 = assertThrows(Exception.class, () ->math.exam120818(10009));
+        System.out.println(exception2.toString());
+    }
 }

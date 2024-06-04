@@ -152,34 +152,33 @@ public class MathExam {
     }
 
     public int exam120837(int hp) throws Exception{
-        if ( hp < 1 || hp > 1000 ){
+        if ( hp < 0 || hp > 1000 ){
             throw new Exception("hp는 자연수이며 1000보다 작거나 같아야합니다");
         }
-        int a, b, c;
+        int a = 0, b = 0, c = 0;
         a = hp / 5 ;
-        b = a / 3 ;
-        c = a % 3;
+        b = hp % 5 / 3 ;
+        c = hp % 5 % 3 ;
         int hap = a + b + c;
         return hap;
     }
 
     public int exam120818(int price) throws Exception{
-        if ( price < 10 || price > 1000000){
-            throw new Exception("price가 10과 100만 사이여야 합니다");
+        if (price < 10 || price > 1000000) {
+            throw new Exception(String.format("[%d]는 10~1,000,000 을 벗어남", price));
         }
-        double A = price - price % 10;
+        if (!(price % 10 == 0)) {
+            throw new Exception("price는 10원 단위여야 합니다.");
+        }
 
-        double p = 0.0d;
-        if ( A >= 100000 ){
-            p = A / 100 * 95;
-            if ( A >= 300000){
-                p = A / 100 * 90;
-                if ( A >= 500000){
-                    p = A / 100 * 80;
-                }
-            }
+        if (price >= 500000) {
+            price *= 0.8;
+        } else if (price >= 300000) {
+            price *= 0.9;
+        } else if (price >= 100000) {
+            price *= 0.95;
         }
-        int result = (int)p;
-        return result;
+
+        return (int) price;
     }
 }
