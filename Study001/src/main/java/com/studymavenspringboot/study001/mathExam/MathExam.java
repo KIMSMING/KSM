@@ -161,4 +161,7 @@ public class MathExam {
         int hap = a + b + c;
         return hap;
     }
+    public int exam120818(int price) throws Exception{
+        return 0;
+    }
 }
