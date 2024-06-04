@@ -162,6 +162,20 @@ public class MathExam {
         return hap;
     }
     public int exam120818(int price) throws Exception{
-        return 0;
+        if ( price < 10 || price > 1000000){
+            throw new Exception("price가 10과 100만 사이여야 합니다");
+        }
+        double p = 0.0d;
+        if ( price >= 100000 ){
+            p = price / 100 * 95;
+            if ( price >= 300000){
+                p = price / 100 * 90;
+                if ( price >= 500000){
+                    p = price / 100 * 80;
+                }
+            }
+        }
+        int result = (int)p;
+        return result;
     }
 }
