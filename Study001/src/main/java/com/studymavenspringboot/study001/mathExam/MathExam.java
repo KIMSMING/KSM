@@ -132,4 +132,23 @@ public class MathExam {
         k[1] = change;
         return k;
     }
+    public int exam120585(int[] array, int height) throws Exception{
+        int count = 0;
+        if (array.length < 1 || array.length > 100){
+            throw new Exception("array의 길이는 1보다 크거나 같고 100보다 작거나 같아야 합니다");
+        }
+        if (height < 1 || height > 200){
+            throw new Exception("height는 1보다 크거나 같고 200보다 크거나 같아야 합니다");
+        }
+        for (int i = 0; i < array.length; i++){
+            if(array[i]<1 || array[i] > 200){
+                throw new Exception("array배열의 원소는 1보다 크거나 같고 200보다 작거나 같아야합니다");
+            }
+            if(array[i] > height){
+                count++;
+            }
+        }
+        return count;
+    }
+
 }

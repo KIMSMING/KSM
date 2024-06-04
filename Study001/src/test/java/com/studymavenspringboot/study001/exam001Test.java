@@ -144,4 +144,19 @@ public class exam001Test {
         assertThat(math.exam120819(5500)).isEqualTo((new int[]{1, 0}));
         assertThat(math.exam120819(15000)).isEqualTo((new int[]{2, 4000}));
     }
+    @Test
+    public void exam120585() throws Exception{
+        System.out.println("exam120585");
+        MathExam math = new MathExam();
+        Throwable ex1 = assertThrows(Exception.class, () -> math.exam120585(new int[]{}, 150));
+        System.out.println(ex1.toString());
+        Throwable ex2 = assertThrows(Exception.class, () -> math.exam120585(new int[]{150, 201}, 130));
+        System.out.println(ex2.toString());
+        Throwable ex3 = assertThrows(Exception.class, () -> math.exam120585(new int[]{150, 180}, 201));
+        System.out.println(ex3.toString());
+
+        assertThat(math.exam120585(new int[]{149, 180, 192, 170}, 167)).isEqualTo(3);
+        assertThat(math.exam120585(new int[]{180, 120, 140}, 190)).isEqualTo(0);
+
+    }
 }
