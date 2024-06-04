@@ -150,6 +150,7 @@ public class MathExam {
         }
         return count;
     }
+
     public int exam120837(int hp) throws Exception{
         if ( hp < 1 || hp > 1000 ){
             throw new Exception("hp는 자연수이며 1000보다 작거나 같아야합니다");
@@ -161,17 +162,20 @@ public class MathExam {
         int hap = a + b + c;
         return hap;
     }
+
     public int exam120818(int price) throws Exception{
         if ( price < 10 || price > 1000000){
             throw new Exception("price가 10과 100만 사이여야 합니다");
         }
+        double A = price - price % 10;
+
         double p = 0.0d;
-        if ( price >= 100000 ){
-            p = price / 100 * 95;
-            if ( price >= 300000){
-                p = price / 100 * 90;
-                if ( price >= 500000){
-                    p = price / 100 * 80;
+        if ( A >= 100000 ){
+            p = A / 100 * 95;
+            if ( A >= 300000){
+                p = A / 100 * 90;
+                if ( A >= 500000){
+                    p = A / 100 * 80;
                 }
             }
         }
