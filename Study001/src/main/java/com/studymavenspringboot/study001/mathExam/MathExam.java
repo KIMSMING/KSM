@@ -181,4 +181,118 @@ public class MathExam {
 
         return (int) price;
     }
+
+    //개미 군단
+    public int mathTest120835(int hp) throws Exception {
+        if (hp < 1 || hp > 1000) {
+            throw new Exception("hp는 1~1000의 값만 가능합니다");
+        }
+
+        int jang, byung, il;  //앞에서부터 장군개미, 병정개미, 일개미의 수
+
+        jang = hp / 5;
+        byung = 0;
+        il = 0;
+
+        if (hp % 5 >= 3) {
+            byung = (hp % 5) / 3;
+            il = (hp % 5) % 3;
+        }
+        else{
+            il = hp % 5;
+        }
+
+        int ans = jang + byung + il;
+
+        return ans;
+    }
+    public int exam120906(int n) throws Exception{
+        if(n < 0 || n > 1000000){
+            throw new Exception("n의 값이 0~100만 사이여야 합니다");
+        }
+        int result = 0;
+        int[] sum = new int[7];
+        sum[0] = n / 1000000;
+        sum[1] = n % 1000000 / 100000;
+        sum[2] = n % 100000 / 10000;
+        sum[3] = n % 10000 / 1000;
+        sum[4] = n % 1000 / 100;
+        sum[5] = n % 100 / 10;
+        sum[6] = n % 10;
+
+        for(int j = 0; j < 7; j++){
+            result += sum[j];
+        }
+
+        return result;
+    }
+    public String exam120839(String rsp) throws Exception{
+        if ( rsp == null){
+            throw new Exception("rsp 값이 null이 아니어야 합니다");
+        }
+        if ( rsp.length() <= 0 || rsp.length() > 100 ){
+            throw new Exception(String.format("rsp[%s] 문자열의 길이는 1에서 100글자 사이여야 합니다", rsp));
+        }
+        String result = "";
+        for ( int i = 0; i < rsp.length(); i++){
+            char ch = rsp.charAt(i);
+            if ( ch == '2' ){
+                result += "0";
+            }else if ( ch == '0' ){
+                result += "5";
+            }else if ( ch == '5' ){
+                result += "2";
+            }else{
+                throw new Exception(String.format("rsp[%c] 문자는 '2', '0', '5' 중에 하나 이어야 합니다", ch));
+            }
+        }
+        return result;
+    }
+    /*
+    public int exam120891(String order) throws Exception{
+        if ( order == null ){
+            throw new Exception("order값이 null이 아니어야 합니다");
+        }
+        int intOrder = Integer.parseInt(order);
+        if ( intOrder < 1 || intOrder >= 1000000 ){
+            throw new Exception(String.format("order[%s] 값이 1에서 100만 사이여야 합니다", order));
+        }
+        int count = 0;
+        for ( int i = 0; i < order.length(); i++ ){
+            char ch = order.charAt(i);
+            if ( ch == '3' || ch == '6' || ch == '9'){
+                count++;
+            }
+        }
+        return count;
+    }
+     */
+
+    public int[] exam120899(int[] array) throws Exception{
+        int M = 0;
+        int i;
+        int t = 0;
+        if ( array.length < 1 || array.length > 100 ){
+            throw new Exception("array 배열의 길이는 1부터 100 사이여야 합니다");
+        }
+        for ( i = 0; i < array.length; i++){
+            if ( array[i] < 0 || array[i] > 1000){
+                throw new Exception("array 배열의 원소값이 0에서 1000 사이여야 합니다");
+            }
+            for(int j = i + 1; j< array.length; j++) {
+                if (array[i] == array[j]) {
+                    throw new Exception("array배열의 값이 중복이면 안됩니다");
+                }
+            }
+            if ( M < array[i]) {
+                M = array[i];
+                t = i;
+            }
+        }
+        int[] arr = {M,t};
+
+
+        return arr;
+    }
+
 }
