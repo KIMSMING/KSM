@@ -291,7 +291,6 @@ public class MathExam {
         }
         int[] arr = {M,t};
 
-
         return arr;
     }
 

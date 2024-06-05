@@ -261,4 +261,28 @@ public class exam001Test {
         assertThat(math.exam120899(new int[]{1, 8, 3})).isEqualTo(new int[]{8, 1});
         assertThat(math.exam120899(new int[]{9, 10, 11, 8})).isEqualTo(new int[] {11, 2});
     }
+    @Test
+    public void numberPrint() throws Exception{
+        int x = 0b1011, y = 0206, z = 0x2A0F;
+        char a = 'A', b = 'B', c = 'C';
+        System.out.println(String.format("10진수 : x = %d, y = %d, z = %d", x, y, z));
+        System.out.println(String.format("8진수 : x = %o, y = %o, z = %o", x, y, z));
+        System.out.println(String.format("16진수 : x = %X, y = %X, z = %X", x, y, z));
+        System.out.println(String.format("Char : x = %c, y = %c, z = %c", x, y, z));
+
+        System.out.println(String.format("10진수 : a = %d, b = %d, c = %d", (int)a, (int)b, (int)c));
+        System.out.println(String.format("8진수 : a = %o, b = %o, c = %o", (int)a, (int)b, (int)c));
+        System.out.println(String.format("16진수 : a = %X, b = %X, c = %X", (long)a, (byte)b, (short)c));
+        System.out.println(String.format("Char : a = %c, b = %c, c = %c", a, b, c));
+
+        int value = 1 + 2 + 3;
+        String str1 = 1 + 2 + "3";
+        String str2 = 1 + "2" + 3;
+        String str3 = "1" + 2 + 3;
+        System.out.println(str1);
+        System.out.println(str2);
+        System.out.println(str3);
+
+    }
+    
 }
