@@ -113,4 +113,18 @@ public class QuestExam {
             System.out.print("Normal");
         }
     }
+    public static void code1165() throws Exception {
+        Scanner scanner = new Scanner(System.in);
+        int time = scanner.nextInt();
+        int Gall = scanner.nextInt();
+        int T = 0;
+        int G = 0;
+        if ( time < 90 ){
+            T = 89 - time;
+        }
+        G = T / 5;
+        int result = G + Gall + 1;
+        System.out.print(result);
+    }
+
 }
