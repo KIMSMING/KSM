@@ -97,4 +97,20 @@ public class QuestExam {
         double result = a * x;
         System.out.println((int)result);
     }
+
+    public static void code1166() throws Exception{
+        Scanner scanner = new Scanner(System.in);
+        int year = scanner.nextInt();
+        double a = Math.pow(2,32);
+        if ( year < 1 || year > a - 1){
+            throw new Exception("year 값은 1보다 크거나같고 2^32-1보다 작거나 같아야합니다.");
+        }
+        if ( year % 400 == 0){
+            System.out.print("Leap");
+        }else if ( year % 4 == 0 && year % 100 != 0 ) {
+            System.out.print("Leap");
+        }else{
+            System.out.print("Normal");
+        }
+    }
 }
