@@ -1,7 +1,66 @@
 package com.studymavenspringboot.study001.mathExam;
 import java.util.Scanner;
 public class QuestExam {
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args) throws Exception {
+
+    }
+    public static void code1045() throws Exception{
+        Scanner scanner = new Scanner(System.in);
+        int a = scanner.nextInt();
+        int b = scanner.nextInt();
+        if( a <= 0){
+            throw new Exception("a의 값은 0보다 커야합니다");
+        }
+        if( b > 2147483647 || b == 0){
+            throw new Exception("b의 값이 0이 아니고 2147483647보다 작거나같아야합니다.");
+        }
+        double num = (a * 1.0) / b;
+        String result = String.format("%.2f", num);
+        System.out.println(a + b);
+        System.out.println(a - b);
+        System.out.println(a * b);
+        System.out.println(a / b);
+        System.out.println(a % b);
+        System.out.println(result);
+    }
+
+    public static void code1046() throws Exception{
+        Scanner scanner = new Scanner(System.in);
+        int a = scanner.nextInt();
+        int b = scanner.nextInt();
+        int c = scanner.nextInt();
+        if( a <= -2147483648 || a >= +2147483647){
+            throw new Exception("a의 값이 -2147483648 +2147483648 사이여야 합니다");
+        }
+        if( b <= -2147483648 || b >= 2147483647){
+            throw new Exception("b의 값이 -2147483648 +2147483648 사이여야 합니다");
+        }
+        if( c <= -2147483648 || c >= 2147483647){
+            throw new Exception("c의 값이 -2147483648 +2147483648 사이여야 합니다");
+        }
+        int sum = a+ b+ c;
+        double av = (double) sum / 3;
+        String result = String.format("%.1f", av);
+        System.out.println(sum);
+        System.out.println(result);
+    }
+
+    public static void code1058() throws Exception{
+        Scanner scanner = new Scanner(System.in);
+        int a = scanner.nextInt();
+        int b = scanner.nextInt();
+        int result = 0;
+        if((a == 0) && (b == 0)){
+            result = 1;
+        }
+        else{
+            result = 0;
+        }
+
+        System.out.print(result);
+    }
+
+    public static void code1085() throws Exception{
         Scanner scanner = new Scanner(System.in);
         int h = scanner.nextInt();
         int b = scanner.nextInt();
@@ -23,5 +82,19 @@ public class QuestExam {
         double x = (double) (h * (long)b * c * s) / (8 * 1024 * 1024);
         String result = String.format("%.1f", x);
         System.out.println(result + " MB");
+    }
+
+    public static void code1090() throws Exception{
+        Scanner scanner = new Scanner(System.in);
+        int a = scanner.nextInt();
+        int r = scanner.nextInt();
+        int n = scanner.nextInt();
+
+        if ( a < 0 || a > 10 || n < 0 || n > 10 || r < 0 || r > 10){
+            throw new Exception("a, n, r의 값은 모두 0에서 10 사이여야 합니다");
+        }
+        double x = Math.pow(n, r);
+        double result = a * x;
+        System.out.println((int)result);
     }
 }
