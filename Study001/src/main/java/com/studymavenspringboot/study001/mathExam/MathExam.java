@@ -293,5 +293,55 @@ public class MathExam {
 
         return arr;
     }
+    public int exam120810(int num1, int num2) throws Exception{
+        if (num1 <= 0 || num1 > 100){
+            throw new Exception("num1이 1과 100 사이의 숫자여야 합니다");
+        }
+        if (num2 <= 0 || num2 > 100){
+            throw new Exception("num2이 1과 100 사이의 숫자여야 합니다");
+        }
+        int result = 0;
 
+        result = num1 % num2;
+
+        return result;
+    }
+    public int exam120806(int num1, int num2) throws Exception{
+        if (num1 <= 0 || num1 > 100){
+            throw new Exception("num1이 1과 100 사이의 숫자여야 합니다");
+        }
+        if (num2 <= 0 || num2 > 100){
+            throw new Exception("num2이 1과 100 사이의 숫자여야 합니다");
+        }
+        double result = 0.0d;
+
+        result = (double)num1 / num2;
+
+        int R = (int)(result * 1000);
+
+        return R;
+    }
+    /*
+    public int exam120811(int[] array) throws Exception{
+        if ( array.length % 2 == 0 || array.length <= 0 || array.length >= 100){
+            throw new Exception("array 배열의 길이는 0에서 100 사이이며 길이는 홀수입니다");
+        }
+        for ( int i = 0; i < array.length; i++){
+            if(array[i] <= -1000 || array[i] >= 1000){
+                throw new Exception("array 배열의 원소값은 -1000에서 1000 사이입니다.");
+            }
+            if(i < array.length - 1) {
+                if (array[i] < array[i + 1]) {
+                    int temp = array[i];
+                    array[i] = array[i + 1];
+                    array[i + 1] = temp;
+                }
+            }
+        }
+        int leng = (array.length + 1 ) / 2;
+
+        return array[leng - 1];
+    }
+
+     */
 }
