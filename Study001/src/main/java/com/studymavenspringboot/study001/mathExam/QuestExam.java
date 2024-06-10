@@ -4,6 +4,7 @@ public class QuestExam {
     public static void main(String[] args) throws Exception {
 
     }
+
     public static void code1045() throws Exception{
         Scanner scanner = new Scanner(System.in);
         int a = scanner.nextInt();
@@ -245,5 +246,59 @@ public class QuestExam {
         }
     }
 
-    public static void code
+    public static void code1226() throws Exception{
+        Scanner scanner = new Scanner(System.in);
+        int[] array1 = new int[7];
+        int[] array2 = new int[6];
+        int cnt = 0;
+
+        for (int i = 0; i < array1.length; i++) {
+            array1[i] = scanner.nextInt();
+        }
+        for (int i = 0; i < array2.length; i++) {
+            array2[i] = scanner.nextInt();
+        }
+
+        for (int i = 0; i < array1.length - 1; i ++) {
+            for(int j = 0; j < array2.length; j++) {
+                if ( array1[i] == array2[j] ) {
+                    cnt++;
+                    break;
+                }
+            }
+        }
+        int a = 0;
+        for(int j = 0; j < array2.length; j++) {
+            if ( array1[6] == array2[j] ) {
+                a = 1;
+                break;
+            }
+        }
+        int result = 0;
+        if(cnt == 5 && a == 1) {
+            result = 2;
+        }else{
+            switch( cnt ) {
+                case 0:
+                case 1:
+                case 2:
+                    result = 0;
+                    break;
+                case 3:
+                    result = 5;
+                    break;
+                case 4:
+                    result = 4;
+                    break;
+                case 5:
+                    result = 3;
+                    break;
+                case 6:
+                    result = 1;
+                    break;
+            }
+        }
+        System.out.print(result);
+
+    }
 }
