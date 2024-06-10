@@ -301,4 +301,34 @@ public class QuestExam {
         System.out.print(result);
 
     }
+
+    public static void code1368() throws Exception{
+        Scanner sc = new Scanner(System.in);
+        int h = sc.nextInt();
+        int k = sc.nextInt();
+        String d = sc.next();
+        if ( d.equals("L") ){
+            for(int i = 0; i < h; i++){
+                for(int j = 0; j <= h; j++){
+                    System.out.print(" ");
+                }
+                for(int j = 0; j < k; j++){
+                    System.out.print("*");
+                }
+                System.out.println();
+
+            }
+        }else if ( d.equals("R") ){
+            for(int i = 0; i < h; i++){
+                for(int j = h-1; j >= i; j--){
+                    System.out.print(" ");
+                }
+                for(int j = 0; j < k; j++){
+                    System.out.print("*");
+                }
+                System.out.println();
+            }
+        }
+
+    }
 }
