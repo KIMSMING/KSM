@@ -139,5 +139,14 @@ public class QuestExam {
             }
         }
     }
-    
+    public static void code1079() throws Exception{
+        Scanner scanner = new Scanner(System.in);
+        while(true){
+            char n = scanner.next().charAt(0);
+            System.out.println(n);
+            if( n == 'q' ){
+                break;
+            }
+        }
+    }
 }
