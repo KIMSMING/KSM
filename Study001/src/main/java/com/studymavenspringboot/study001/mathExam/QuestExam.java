@@ -113,6 +113,7 @@ public class QuestExam {
             System.out.print("Normal");
         }
     }
+
     public static void code1165() throws Exception {
         Scanner scanner = new Scanner(System.in);
         int time = scanner.nextInt();
@@ -127,4 +128,16 @@ public class QuestExam {
         System.out.print(result);
     }
 
+    public static void code1231() throws Exception{
+        Scanner scanner = new Scanner(System.in);
+        while(true){
+            int n = scanner.nextInt();
+            System.out.println(n);
+            if( n == 0 ){
+
+                break;
+            }
+        }
+    }
+    
 }
