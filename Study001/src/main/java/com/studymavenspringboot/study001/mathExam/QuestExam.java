@@ -150,4 +150,100 @@ public class QuestExam {
             }
         }
     }
+
+    public static void code1255() throws Exception{
+        Scanner sc = new Scanner(System.in);
+        double a = sc.nextDouble();
+        double b = sc.nextDouble();
+
+        if( a > b ){
+            throw new Exception("a의 값이 b의 값보다 작거나 같습니다");
+        }
+
+        for( double n = a; n <= b; n += 0.01 ){
+            String result = String.format("%.2f", n);
+            System.out.print( result + " ");
+        }
+    }
+
+    public static void code1253() throws Exception{
+        Scanner sc = new Scanner(System.in);
+        int a = sc.nextInt();
+        int b = sc.nextInt();
+        int tmp = 0;
+
+        if( a < b ){
+            tmp = a;
+            a = b;
+            b = tmp;
+        }
+
+        for( int n = b; n <= a; n++ ){
+            System.out.print( n + " ");
+        }
+    }
+
+    public static void code1283() throws Exception{
+        Scanner sc = new Scanner(System.in);
+        int a = sc.nextInt();
+        int b = sc.nextInt();
+        int[] array = new int[b];
+        double result = a;
+
+        if ( a < 100 || a > 10000 ){
+            throw new Exception( "a의 값은 100과 10000 사이입니다" );
+        }
+
+        if ( b < 1 || b > 10){
+            throw new Exception( "b의 값은 1과 10 사이 입니다." );
+        }
+
+        for(int i = 0 ; i < array.length; i++){
+            array[i] = sc.nextInt();
+            if ( array[i] < -100 || array[i] > 100 ){
+                throw new Exception("array[i]의 값은 -100과 100 사이의 숫자입니다");
+            }
+            result = result * (array[i] + 100) / 100;
+        }
+        double n = result - a;
+        String result1 = String.format("%.0f", n);
+            if ( n < 0 ){
+                System.out.println(result1);
+                System.out.println("bad");
+            }else if ( n == 0 ){
+                System.out.println(result1);
+                System.out.println("same");
+            }else if ( n > 0 ){
+                System.out.println(result1);
+                System.out.println("good");
+            }
+
+    }
+
+    public static void code1284() throws Exception{
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int a = 0, b = 0;
+        if( n < 1 || n > 10000000){
+            throw new Exception("n의 값이 1 과 1천만 사이의 숫자입니다");
+        }
+        for(int i = 2; i <= n; i++){
+            for(int j = 2; j < n; j++){
+                if( i * j == n){
+                    a = i;
+                    b = j;
+                    break;
+                }
+            }if( a != 0 && b != 0){
+                break;
+            }
+        }
+        if( a == 0 && b == 0){
+            System.out.print("wrong number");
+        }else {
+            System.out.print(a + " " + b);
+        }
+    }
+
+    public static void code
 }
