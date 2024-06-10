@@ -114,7 +114,7 @@ public class QuestExam {
         }
     }
 
-    public static void code1165() throws Exception {
+    public static void code1165() throws Exception{
         Scanner scanner = new Scanner(System.in);
         int time = scanner.nextInt();
         int Gall = scanner.nextInt();
@@ -139,6 +139,7 @@ public class QuestExam {
             }
         }
     }
+
     public static void code1079() throws Exception{
         Scanner scanner = new Scanner(System.in);
         while(true){
