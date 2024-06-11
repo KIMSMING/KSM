@@ -331,4 +331,22 @@ public class QuestExam {
         }
 
     }
+
+    public static void code1094() throws Exception{
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] k = new int[n];
+        if( n < 1 || n > 10000 ){
+            throw new Exception("a는 1에서 10000 사이입니다.");
+        }
+        for(int i = 0; i < k.length; i++ ){
+            k[i] = sc.nextInt();
+            if( k[i] < 1 || k[i] > 23 ){
+                throw new Exception("k[i]의 값은 1~23 입니다");
+            }
+        }
+        for(int i = n - 1; i >= 0; i--){
+            System.out.print(k[i] + " ");
+        }
+    }
 }
