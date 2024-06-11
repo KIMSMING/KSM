@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class Student extends Object{
+public class Student {
     private String name;    //멤버편수(필드)는 무조건 private, Getter, Setter을 만들어야 한다.
     private int score;
 
