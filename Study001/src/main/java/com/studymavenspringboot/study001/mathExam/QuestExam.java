@@ -349,4 +349,43 @@ public class QuestExam {
             System.out.print(k[i] + " ");
         }
     }
+
+    public static void code1430() throws Exception{
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int[] array = new int[N];
+        if(N < 1 || N > 10000000){
+            throw new Exception("N의 값은 1~1천만 사이입니다");
+        }
+        for(int i = 0; i < N; i++){
+            array[i] = sc.nextInt();
+            if(array[i] < 1 || array[i] > 10000000){
+                throw new Exception("array[i]의 값은 1~1천만 사이 입니다");
+            }
+        }
+
+        int M = sc.nextInt();
+        int[] result = new int[M];
+        if(M < 1 || M > 100000){
+            throw new Exception("M의 값은 1부터 1십만 사이입니다");
+        }
+        for(int i = 0; i < M; i++){
+            result[i] = sc.nextInt();
+        }
+        for (int i = 0; i < N; i++) {
+            boolean found = false;
+            for (int j = 0; j < M; j++) {
+                if (array[i] == result[j]) {
+                    found = true;
+                    break;
+                }
+            }
+            if (found) {
+                System.out.print("1");
+            } else {
+                System.out.print("0");
+            }
+        }
+    }
+
 }
