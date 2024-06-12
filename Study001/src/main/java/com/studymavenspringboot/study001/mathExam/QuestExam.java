@@ -2,7 +2,7 @@ package com.studymavenspringboot.study001.mathExam;
 import java.util.Scanner;
 public class QuestExam {
     public static void main(String[] args) throws Exception {
-        code3015();
+//        code3015();
     }
 
     public static void code1045() throws Exception{
@@ -419,7 +419,6 @@ public class QuestExam {
 //                    int tempScore = students[i].getScore();
 //
 //                    students[i].setName( students[j].getName() );
-//                    students[i].setScore( students[j].getScore() );
 //
 //                    students[j].setName( tempName );
 //                    students[j].setScore( tempScore );
