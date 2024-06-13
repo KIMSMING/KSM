@@ -40,11 +40,13 @@ public class BankApplication {
         System.out.print("초기입금액 : ");
         int money = sc.nextInt();
         System.out.println("계좌가 생성되었습니다");
-
-        AccountArray[i] = new Account();
+/*
+        AccountArray[i] = new Account;
 
         i++;
 
+
+ */
     }
     private static void accountList(){
         System.out.println("------------------------------");
