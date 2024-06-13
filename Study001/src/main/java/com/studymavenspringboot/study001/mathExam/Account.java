@@ -13,7 +13,6 @@ public class Account {
     @Setter
     @Getter
     private int money;
-    private int hap;
 
     public Account(String num, String name, int money) {
         this.num = num;

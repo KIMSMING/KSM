@@ -1,7 +1,10 @@
 package com.studymavenspringboot.study001.mathExam;
 
+import java.util.Scanner;
 
 public class Main {
+
+
     public static void main(String[] args) {
 
 //        Printer.println(10);
@@ -32,5 +35,15 @@ public class Main {
 //
 //        account.setBalance(300000);
 //        System.out.println("현재잔고: " + account.getBalance());
+//            Scanner sc = new Scanner(System.in);
+//            int n = sc.nextInt();
+//            String[] code = new String[n];
+//            Code newCode = new Code(String, String, String );
+//            for(int i = 0; i < n; i++){
+//                if(code != null){
+//                    newCode[i] = sc.next();
+//                }
+//                System.out.print("결과는" + newCode[i]);
+//            }
           }
 }
