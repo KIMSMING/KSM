@@ -4,9 +4,16 @@ import lombok.Getter;
 import lombok.Setter;
 
 public class Account {
+    @Setter
+    @Getter
     private String num;
+    @Setter
+    @Getter
     private String name;
+    @Setter
+    @Getter
     private int money;
+    private int hap;
 
     public Account(String num, String name, int money) {
         this.num = num;
@@ -14,26 +21,7 @@ public class Account {
         this.money = money;
     }
 
-
-    public String getNum(){
-            return num;
-        }
-        public void setNum(String num){
-            this.num = num;
-        }
-        public String getName(){
-            return name;
-        }
-        public void setName(String name){
-            this.name = name;
-        }
-        public int getMoney(){
-            return money;
-        }
-        public void setMoney(int money){
-            this.money = money;
-        }
-     /*
+    /*
     static final int MIN_BALANCE = 0;
     static final int MAX_BALANCE = 1000000;
     private int balance;
