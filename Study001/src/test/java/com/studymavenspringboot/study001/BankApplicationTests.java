@@ -12,6 +12,5 @@ public class BankApplicationTests {
 
         accountService.addAccount("홍길동", "111-111", 20000);
 
-        Account find = accountService.findAccountByNumber("111-111");
     }
 }

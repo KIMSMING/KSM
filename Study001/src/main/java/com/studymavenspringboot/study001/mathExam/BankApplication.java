@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Scanner;
 public class BankApplication {
-    static Scanner sc = new Scanner(System.in);
+    /*static Scanner sc = new Scanner(System.in);
     static Account[] accountArray = new Account[100];
     static int t = 0, x = 0;
     public static void main(String[] args){
@@ -108,4 +108,6 @@ public class BankApplication {
         }
 
     }
+
+     */
 }
