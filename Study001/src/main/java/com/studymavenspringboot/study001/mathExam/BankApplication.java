@@ -22,10 +22,10 @@ public class BankApplication {
             }else if( i == 5 ){
                 run = false;
             }
-
         }
         System.out.println("프로그램 종료");
     }
+
     private static void createAccount(){
         System.out.println("------------------------------");
         System.out.println("계좌생성");
@@ -40,8 +40,8 @@ public class BankApplication {
         Account newAccount = new Account(num, name, money);
         accountArray[t] = newAccount;
         t++;
-
     }
+
     private static void accountList(){
         System.out.println("------------------------------");
         System.out.println("계좌목록");
@@ -95,6 +95,5 @@ public class BankApplication {
                 }
             }
         }
-
     }
 }
