@@ -1,4 +1,9 @@
 package com.studymavenspringboot.study001.mathExam;
+import com.fasterxml.jackson.core.*;
+
+import java.io.IOException;
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.Scanner;
 public class BankApplication {
     static Scanner sc = new Scanner(System.in);
@@ -50,11 +55,13 @@ public class BankApplication {
         System.out.println("------------------------------");
         for(int j = 0; j < t;j++){
             Account account = accountArray[j];
-            if( account != null){
+            if( account != null ){
                 System.out.println(account.getNum() + "   " + account.getName() + "   " + account.getMoney());
+                break;
             }
         }
     }
+
     private static void deposit(){
         System.out.println("--------------------------------------------------------------------");
         System.out.println("예금");
@@ -70,6 +77,7 @@ public class BankApplication {
                 x += money;
                 accountArray[j].setMoney(x);
                 System.out.println(accountArray[j].getMoney());
+                break;
             }
         }
     }
@@ -87,15 +95,17 @@ public class BankApplication {
             if(account.getNum().equals(num)){
                 if(account.getMoney() < money) {
                     System.out.println("결과 : 출금이 실패했습니다");
-                    return;
+                    break;
                 }else{
                     x = account.getMoney();
                     x -= money;
                     accountArray[j].setMoney(x);
                     System.out.println("결과 : 출금이 성공했습니다");
                     System.out.println(accountArray[j].getMoney());
+                    break;
                 }
             }
         }
+
     }
 }
