@@ -13,18 +13,32 @@ import java.util.Scanner;
 public class BankApplicationNew {
     private AccountService accountService = new AccountService();
 
+    /**
+     * 사용할 목록 출력
+     */
     private void printHeader() {
         System.out.println("========================================================");
         System.out.println("1.계좌생성|2.계좌목록|3.예금|4.출금|5.종료|6.파일읽기|7.파일저장");
         System.out.println("========================================================");
     }
 
+    /**
+     * 선택할 번호 출력
+     * @param input
+     * @return
+     * @throws Exception
+     */
     private int getChoice(Scanner input) throws Exception {
         System.out.print("선택 > ");
         String a = input.nextLine();
         return Integer.parseInt(a);
     }
 
+    /**
+     * 계좌번호 입력칸 출력
+     * @param input
+     * @throws Exception
+     */
     private void addAccount(Scanner input) throws Exception {
         System.out.println("--------");
         System.out.println("계좌생성");
@@ -41,12 +55,20 @@ public class BankApplicationNew {
         this.accountService.addAccount(new Account(name, bankNumber, money));
     }
 
+    /**
+     * 입력했던 계좌번호 출력
+     */
     private void printAccounts() {
         for ( Account account : this.accountService.getAllAccount() ) {
             System.out.println(account.toString());
         }
     }
 
+    /**
+     * 예금
+     * @param input
+     * @throws Exception
+     */
     private void income(Scanner input) throws Exception {
         Account result = getInputConsole(input, "예금");
         if ( result == null ) {
@@ -58,6 +80,11 @@ public class BankApplicationNew {
         }
     }
 
+    /**
+     * 출금
+     * @param input
+     * @throws Exception
+     */
     private void outcome(Scanner input) throws Exception {
         Account result = getInputConsole(input, "출금");
         if ( result == null ) {
@@ -174,6 +201,7 @@ public class BankApplicationNew {
                     default:
                         System.out.println("!!! 잘못된 입력입니다. !!!");
                         break;
+
                 }
             }
         } catch (Exception e) {
