@@ -70,6 +70,9 @@ public class AccountService {
         if ( account == null ) {
             return false;
         }
+        if(money < 0){
+            return false;
+        }
         account.setMoney(account.getMoney() + money);
         return true;
     }

@@ -3,6 +3,7 @@ package test.testfile0620;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class AccountServiceTests {
 
@@ -19,6 +20,11 @@ public class AccountServiceTests {
         assertThat(find).isNotNull();
         assertThat(find.getName()).isEqualTo("홍길동");
         assertThat(find.getMoney()).isEqualTo(20000);
+
+        accountService.addAccount(null, "111-111", 20000);
+        accountService.addAccount("홍길동", null, 20000);
+        accountService.addAccount("홍길동", "111-111", 0);
+
     }
 
     @Test
@@ -40,6 +46,10 @@ public class AccountServiceTests {
 
         Account find3 = accountService.findAccountByNumber("123-231");
         assertThat(find3).isNull();
+        boolean result2 = accountService.deposit("222-222", -10000);
+        assertThat(result2).isEqualTo(false);
+        boolean result3 = accountService.deposit(null, 10000);
+        assertThat(result3).isEqualTo(false);
     }
 
     @Test

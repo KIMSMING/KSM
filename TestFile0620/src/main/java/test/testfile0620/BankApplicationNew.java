@@ -26,11 +26,20 @@ public class BankApplicationNew {
         System.out.println("--------");
         System.out.print("계좌번호:");
         String num = sc.nextLine();
-        System.out.print("계좌주:");
+        System.out.print("계좌주 : ");
         String name = sc.nextLine();
-        System.out.print("초기금액:");
+        System.out.print("초기금액 : ");
         String money = sc.nextLine();
         int don = Integer.parseInt(money);
+        if(num == null){
+            throw new Exception("계좌번호를 입력해야 합니다");
+        }
+        if(name ==  null){
+            throw new Exception("이름을 입력해야합니다");
+        }
+        if(don < 0 || money == null){
+            throw new Exception("초기금액은 음수일 수 없습니다.");
+        }
         this.accountService.addAccount(new Account(name, num, don));
     }
 
@@ -42,9 +51,6 @@ public class BankApplicationNew {
 
     private void deposite(Scanner sc) throws Exception {
         Account result = getScannerConsole(sc, "예금");
-        if ( result == null ) {
-            throw new Exception("에러: 계좌가 존재하지 않습니다.");
-        }
         if ( this.accountService.deposit(result.getNum(), result.getMoney()) ) {
             System.out.println("결과: 예금이 성공되었습니다.");
         }
@@ -52,9 +58,6 @@ public class BankApplicationNew {
 
     private void withdraw(Scanner sc) throws Exception {
         Account result = getScannerConsole(sc, "출금");
-        if ( result == null ) {
-            throw new Exception("에러: 계좌가 존재하지 않습니다.");
-        }
         if ( this.accountService.withdraw(result.getNum(), result.getMoney()) ) {
             System.out.println("결과: 출금이 성공되었습니다.");
         } else {
@@ -62,18 +65,18 @@ public class BankApplicationNew {
         }
     }
 
-    private Account getScannerConsole(Scanner sc, String title) {
+    private Account getScannerConsole(Scanner sc, String title) throws Exception {
         System.out.println("--------");
         System.out.println(title);
         System.out.println("--------");
 
-        System.out.print("계좌번호:");
+        System.out.print("계좌번호 : ");
         String num = sc.nextLine();
         Account account = this.accountService.findAccountByNumber(num);
         if ( account == null ) {
-            return null;
+            throw new Exception("찾으려는 계좌번호가 존재하지 않습니다");
         }
-        System.out.print(title + "액:");
+        System.out.print(title + "액 : ");
         String current = sc.nextLine();
         int money = Integer.parseInt(current);
 
@@ -83,24 +86,24 @@ public class BankApplicationNew {
 
     public static void main(String[] args) {
         try {
-            BankApplicationNew bapp = new BankApplicationNew();
+            BankApplicationNew BApp = new BankApplicationNew();
             Scanner sc = new Scanner(System.in);
             boolean run = true;
             while(run) {
-                bapp.printChoice();
-                int choice = bapp.getChoice(sc);
+                BApp.printChoice();
+                int choice = getChoice(sc);
                 switch (choice) {
                     case 1:
-                        bapp.creatAccount(sc);
+                        BApp.creatAccount(sc);
                         break;
                     case 2:
-                        bapp.printAccounts();
+                        BApp.printAccounts();
                         break;
                     case 3:
-                        bapp.deposite(sc);
+                        BApp.deposite(sc);
                         break;
                     case 4:
-                        bapp.withdraw(sc);
+                        BApp.withdraw(sc);
                         break;
                     case 5:
                         run = false;
