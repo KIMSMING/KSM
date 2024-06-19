@@ -13,7 +13,7 @@ public class BankApplicationNew {
     private static int getChoice(Scanner sc) throws Exception {
         System.out.print("선택 >> ");
         String a = sc.nextLine();
-        if(Integer.parseInt(a) < 1 || Integer.parseInt(a) > 5){
+        if( Integer.parseInt(a) < 1 || Integer.parseInt(a) > 5 || a.equals("")){
             throw new Exception("a의 값은 1에서 5 사이의 숫자여야 합니다");
         }else{
             return Integer.parseInt(a);
@@ -31,19 +31,19 @@ public class BankApplicationNew {
         System.out.print("초기금액 : ");
         String money = sc.nextLine();
         int don = Integer.parseInt(money);
-        if(num == null){
+        if ( num == null ){
             throw new Exception("계좌번호를 입력해야 합니다");
         }
-        if(name ==  null){
+        if ( name ==  null ){
             throw new Exception("이름을 입력해야합니다");
         }
-        if(don < 0 || money == null){
+        if ( don < 0 || money == null ){
             throw new Exception("초기금액은 음수일 수 없습니다.");
         }
         this.accountService.addAccount(new Account(name, num, don));
     }
 
-    private void printAccounts() {
+    private void printAccounts(){
         for ( Account account : this.accountService.getAllAccount() ) {
             System.out.println(account.toString());
         }
@@ -51,17 +51,15 @@ public class BankApplicationNew {
 
     private void deposite(Scanner sc) throws Exception {
         Account result = getScannerConsole(sc, "예금");
-        if ( this.accountService.deposit(result.getNum(), result.getMoney()) ) {
+        if ( this.accountService.deposit(result.getNum(), result.getName(), result.getMoney()) ) {
             System.out.println("결과: 예금이 성공되었습니다.");
         }
     }
 
     private void withdraw(Scanner sc) throws Exception {
         Account result = getScannerConsole(sc, "출금");
-        if ( this.accountService.withdraw(result.getNum(), result.getMoney()) ) {
+        if ( this.accountService.withdraw(result.getNum(), result.getName(), result.getMoney()) ) {
             System.out.println("결과: 출금이 성공되었습니다.");
-        } else {
-            throw new Exception("출금하려는 금액보다 잔액이 적습니다.");
         }
     }
 
@@ -72,15 +70,17 @@ public class BankApplicationNew {
 
         System.out.print("계좌번호 : ");
         String num = sc.nextLine();
-        Account account = this.accountService.findAccountByNumber(num);
-        if ( account == null ) {
-            throw new Exception("찾으려는 계좌번호가 존재하지 않습니다");
+        System.out.print("계좌주 : ");
+        String name = sc.nextLine();
+        Account account = this.accountService.findAccountByNumberAndName(num, name);
+        if (account == null) {
+            throw new Exception("찾으려는 계좌번호와 이름이 일치하지 않습니다");
         }
         System.out.print(title + "액 : ");
         String current = sc.nextLine();
         int money = Integer.parseInt(current);
 
-        return new Account("임시명", num, money);
+        return new Account(name, num, money);
     }
 
 

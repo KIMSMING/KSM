@@ -33,10 +33,10 @@ public class AccountService {
      * @return : true or false
      */
     public boolean addAccount(String name, String num, int money) {
-        Account account = new Account(name, num, money);
-        if(account == null){
+        if (name == null || num == null || money < 0) {
+            System.out.print("유효하지 않은 입력값입니다.");
             return false;
-        }else{
+        } else{
             return this.accountarray.add(new Account(name, num, money));
         }
     }
@@ -65,12 +65,13 @@ public class AccountService {
      * @param money : 예금액
      * @return : 성공일때 true, 실패하면 false
      */
-    public boolean deposit(String num, int money) {
-        Account account = this.findAccountByNumber(num);
+    public boolean deposit(String num, String name, int money) {
+        Account account = this.findAccountByNumberAndName(num, name);
         if ( account == null ) {
             return false;
         }
-        if(money < 0){
+        if ( money < 0 ){
+            System.out.println("예금하려는 금액은 0보다 커야합니다");
             return false;
         }
         account.setMoney(account.getMoney() + money);
@@ -83,9 +84,10 @@ public class AccountService {
      * @param money : 출금액
      * @return : 성공일때 true, 실패하면 false
      */
-    public boolean withdraw(String num, int money) {
-        Account account = this.findAccountByNumber(num);
+    public boolean withdraw(String num,String name, int money) {
+        Account account = this.findAccountByNumberAndName(num, name);
         if ( account == null ) {
+            System.out.print("출금하려는 계좌번호를 적으세요");
             return false;
         }
         if ( account.getMoney() >= money ) {
@@ -101,12 +103,12 @@ public class AccountService {
      * @param num : 찾을 계좌번호
      * @return : Account 객체, 찾지 못하면 null
      */
-    public Account findAccountByNumber( String num ) {
-        if ( num == null || num.isEmpty() ) {
+    public Account findAccountByNumberAndName(String num, String name ) {
+        if (num == null || num.isEmpty() || name == null || name.isEmpty()) {
             return null;
         }
         for ( Account account : accountarray) {
-            if ( num.equals(account.getNum()) ) {
+            if (num.equals(account.getNum()) && name.equals(account.getName())) {
                 return account;
             }
         }
