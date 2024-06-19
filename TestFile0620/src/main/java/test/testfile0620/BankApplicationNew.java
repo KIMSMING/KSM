@@ -5,12 +5,12 @@ import java.util.Scanner;
 public class BankApplicationNew {
     private AccountService accountService = new AccountService();
 
-    private void printChoice() {
+    public void printChoice() {
         System.out.println("=============================================");
         System.out.println("1.계좌생성 | 2.계좌목록 | 3.예금 | 4.출금 | 5.종료");
         System.out.println("=============================================");
         }
-    private static int getChoice(Scanner sc) throws Exception {
+    public static int getChoice(Scanner sc) throws Exception {
         System.out.print("선택 >> ");
         String a = sc.nextLine();
         if( Integer.parseInt(a) < 1 || Integer.parseInt(a) > 5 || a.equals("")){
@@ -51,6 +51,9 @@ public class BankApplicationNew {
 
     private void deposite(Scanner sc) throws Exception {
         Account result = getScannerConsole(sc, "예금");
+        if ( result == null){
+            return;
+        }
         if ( this.accountService.deposit(result.getNum(), result.getName(), result.getMoney()) ) {
             System.out.println("결과: 예금이 성공되었습니다.");
         }
@@ -58,6 +61,9 @@ public class BankApplicationNew {
 
     private void withdraw(Scanner sc) throws Exception {
         Account result = getScannerConsole(sc, "출금");
+        if ( result == null ){
+            return;
+        }
         if ( this.accountService.withdraw(result.getNum(), result.getName(), result.getMoney()) ) {
             System.out.println("결과: 출금이 성공되었습니다.");
         }
@@ -74,7 +80,8 @@ public class BankApplicationNew {
         String name = sc.nextLine();
         Account account = this.accountService.findAccountByNumberAndName(num, name);
         if (account == null) {
-            throw new Exception("찾으려는 계좌번호와 이름이 일치하지 않습니다");
+            System.out.println("찾으려는 계좌번호와 이름이 일치하지 않습니다");
+            return null;
         }
         System.out.print(title + "액 : ");
         String current = sc.nextLine();

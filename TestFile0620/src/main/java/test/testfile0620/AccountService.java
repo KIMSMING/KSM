@@ -62,6 +62,7 @@ public class AccountService {
     /**
      * 계좌번호로 찾은 계좌에 예금을 한다.
      * @param num : 계좌번호
+     * @param name : 계좌주
      * @param money : 예금액
      * @return : 성공일때 true, 실패하면 false
      */
@@ -70,7 +71,7 @@ public class AccountService {
         if ( account == null ) {
             return false;
         }
-        if ( money < 0 ){
+        if ( money <= 0 ){
             System.out.println("예금하려는 금액은 0보다 커야합니다");
             return false;
         }
@@ -81,13 +82,14 @@ public class AccountService {
     /**
      * 계좌번호로 찾은 계좌에 출금을 한다. 현재금액보다 출금액은 커야 한다.
      * @param num : 계좌번호
+     * @param name : 계좌주
      * @param money : 출금액
      * @return : 성공일때 true, 실패하면 false
      */
     public boolean withdraw(String num,String name, int money) {
         Account account = this.findAccountByNumberAndName(num, name);
         if ( account == null ) {
-            System.out.print("출금하려는 계좌번호를 적으세요");
+            System.out.print("출금하려는 계좌번호를 적으셔야합니다.");
             return false;
         }
         if ( account.getMoney() >= money ) {
@@ -99,8 +101,10 @@ public class AccountService {
     }
 
     /**
+     *
      * 계좌번호로 계좌(Account)를 찾아서 리턴한다. 계좌번호가 없으면 null 을 리턴한다.
      * @param num : 찾을 계좌번호
+     * @param name : 찾을 이름
      * @return : Account 객체, 찾지 못하면 null
      */
     public Account findAccountByNumberAndName(String num, String name ) {
@@ -110,6 +114,9 @@ public class AccountService {
         for ( Account account : accountarray) {
             if (num.equals(account.getNum()) && name.equals(account.getName())) {
                 return account;
+            }else{
+                System.out.println("찾으시는 계좌번호가 존재하지 않습니다");
+                return null;
             }
         }
         return null;
