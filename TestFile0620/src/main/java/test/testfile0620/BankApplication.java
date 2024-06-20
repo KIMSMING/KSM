@@ -2,7 +2,7 @@ package test.testfile0620;
 
 import java.util.Scanner;
 
-public class BankApplicationNew {
+public class BankApplication {
     private AccountService accountService = new AccountService();
 
     public void printChoice() {
@@ -80,7 +80,6 @@ public class BankApplicationNew {
         String name = sc.nextLine();
         Account account = this.accountService.findAccountByNumberAndName(num, name);
         if (account == null) {
-            System.out.println("찾으려는 계좌번호와 이름이 일치하지 않습니다");
             return null;
         }
         System.out.print(title + "액 : ");
@@ -93,7 +92,7 @@ public class BankApplicationNew {
 
     public static void main(String[] args) {
         try {
-            BankApplicationNew BApp = new BankApplicationNew();
+            BankApplication BApp = new BankApplication();
             Scanner sc = new Scanner(System.in);
             boolean run = true;
             while(run) {

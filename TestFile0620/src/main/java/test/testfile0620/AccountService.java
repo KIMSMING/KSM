@@ -5,33 +5,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AccountService {
-    /**
-     * 계좌 배열 인스턴스 변수 (객체 프로퍼티, 인스턴스 필드)
-     */
+
     private List<Account> accountarray = new ArrayList<>();
-    /**
-     * 계좌 배열 길이를 int 형으로 리턴한다.
-     * return Accounts array size (int)
-     * @return : Accounts array size (int)
-     */
+
     public int size() {
         return this.accountarray.size();
     }
-    /**
-     * 계좌 목록을 전체 삭제하고 Clear 한다.
-     * clear Accounts all array elements. size will be 0.
-     */
+
     public void clear() {
         this.accountarray.clear();
     }
 
-    /**
-     * 계좌(Account) 배열에 계좌정보(Account) 를 추가한다.
-     * @param name : 계좌대표이름
-     * @param num : 계좌번호
-     * @param money : 초기금액
-     * @return : true or false
-     */
     public boolean addAccount(String name, String num, int money) {
         if (name == null || num == null || money < 0) {
             System.out.print("유효하지 않은 입력값입니다.");
@@ -41,31 +25,14 @@ public class AccountService {
         }
     }
 
-    /**
-     * 계좌(Account) 배열에 계좌정보(Account) 를 추가한다.
-     * @param account : 계좌정보 Account 객체
-     * @return : true or false
-     */
     public boolean addAccount(Account account) {
         return this.accountarray.add(account);
     }
 
-    /**
-     * 계좌 배열을 리턴한다.
-     * return Accounts Array List
-     * @return
-     */
     public List<Account> getAllAccount() {
         return this.accountarray;
     }
 
-    /**
-     * 계좌번호로 찾은 계좌에 예금을 한다.
-     * @param num : 계좌번호
-     * @param name : 계좌주
-     * @param money : 예금액
-     * @return : 성공일때 true, 실패하면 false
-     */
     public boolean deposit(String num, String name, int money) {
         Account account = this.findAccountByNumberAndName(num, name);
         if ( account == null ) {
@@ -79,13 +46,6 @@ public class AccountService {
         return true;
     }
 
-    /**
-     * 계좌번호로 찾은 계좌에 출금을 한다. 현재금액보다 출금액은 커야 한다.
-     * @param num : 계좌번호
-     * @param name : 계좌주
-     * @param money : 출금액
-     * @return : 성공일때 true, 실패하면 false
-     */
     public boolean withdraw(String num,String name, int money) {
         Account account = this.findAccountByNumberAndName(num, name);
         if ( account == null ) {
@@ -96,29 +56,28 @@ public class AccountService {
             account.setMoney(account.getMoney() - money);
             return true;
         } else {
+            System.out.println("잔액이 부족합니다");
             return false;
         }
     }
 
-    /**
-     *
-     * 계좌번호로 계좌(Account)를 찾아서 리턴한다. 계좌번호가 없으면 null 을 리턴한다.
-     * @param num : 찾을 계좌번호
-     * @param name : 찾을 이름
-     * @return : Account 객체, 찾지 못하면 null
-     */
-    public Account findAccountByNumberAndName(String num, String name ) {
+    public Account findAccountByNumberAndName(String num, String name) {
         if (num == null || num.isEmpty() || name == null || name.isEmpty()) {
+            System.out.println("계좌번호와 계좌주 이름을 입력해야 합니다.");
             return null;
         }
-        for ( Account account : accountarray) {
-            if (num.equals(account.getNum()) && name.equals(account.getName())) {
-                return account;
-            }else{
-                System.out.println("찾으시는 계좌번호가 존재하지 않습니다");
-                return null;
+        for (Account account : accountarray) {
+            if (num.equals(account.getNum())) {
+                if (name.equals(account.getName())) {
+                    return account;
+                } else {
+                    System.out.println("계좌번호는 맞지만 계좌주가 일치하지 않습니다.");
+                    return null;
+                }
             }
         }
+        System.out.println("찾으시는 계좌번호가 존재하지 않습니다.");
         return null;
     }
+
 }
