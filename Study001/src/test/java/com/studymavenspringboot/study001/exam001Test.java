@@ -342,7 +342,23 @@ public class exam001Test {
     }
 
      */
+    @Test
+    public void climbStairsTest(){
+//        Throwable ex1 = assertThrows(Exception.class, () -> numSetBite(0));
+//        System.out.println(ex1.toString());
 
+        Throwable ex3 = assertThrows(Exception.class, () -> climbStairs(0));
+        System.out.println(ex3.toString());
+
+        assertThat(climbStairs(0)).isEqualTo(0);
+
+    }
+    public int climbStairs(int numberStair){
+        int result = 0;
+
+        return 0;
+
+    }
 }
 
 
