@@ -1,10 +1,8 @@
 package rent.rentcar.models;
 
-
 import lombok.Getter;
 
 @Getter
-
 public class Car implements Vehicle{
     private Long id;
     private String company;
@@ -18,4 +16,48 @@ public class Car implements Vehicle{
     private VehicleStatus status;
 
 
+    @Override
+    public String setCompany() {
+        return "";
+    }
+
+    @Override
+    public String setModel() {
+        return "";
+    }
+
+    @Override
+    public int setMakeYear() {
+        return 0;
+    }
+
+    @Override
+    public VehicleType setType() {
+        return null;
+    }
+
+    @Override
+    public String setColor() {
+        return "";
+    }
+
+    @Override
+    public int setTotalKm() {
+        return 0;
+    }
+
+    @Override
+    public String setFactoryNumber() {
+        return "";
+    }
+
+    @Override
+    public String setRegistNumber() {
+        return "";
+    }
+
+    @Override
+    public VehicleStatus setStatus() {
+        return null;
+    }
 }
