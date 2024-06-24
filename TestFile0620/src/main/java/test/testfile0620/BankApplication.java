@@ -4,10 +4,11 @@ import java.util.Scanner;
 
 public class BankApplication {
     private AccountService accountService = new AccountService();
+    private AccountService AccountRepository
 
     public void printChoice() {
         System.out.println("=============================================");
-        System.out.println("1.계좌생성 | 2.계좌목록 | 3.예금 | 4.출금 | 5.종료");
+        System.out.println("1.계좌생성 | 2.계좌목록 | 3.예금 | 4.출금 | 5.종료 | 6.파일 저장 | 7.파일 읽기");
         System.out.println("=============================================");
         }
     public static int getChoice(Scanner sc) throws Exception {
@@ -88,7 +89,24 @@ public class BankApplication {
 
         return new Account(name, num, money);
     }
+    private void loadFile(Scanner sc){
+        System.out.println("--------");
+        System.out.println("파일읽기");
+        System.out.println("--------");
 
+        System.out.print("파일이름:");
+        String fileName = sc.nextLine();
+    }
+
+    private void saveFile(Scanner sc){
+        System.out.println("--------");
+        System.out.println("파일저장");
+        System.out.println("--------");
+
+        System.out.print("파일이름:");
+        String fileName = sc.nextLine();
+
+    }
 
     public static void main(String[] args) {
         try {
@@ -116,6 +134,12 @@ public class BankApplication {
                         break;
                     default:
                         System.out.println("잘못된 입력입니다. 다시 입력하세요");
+                        break;
+                    case 6:
+                        BApp.loadJson();
+                        break;
+                    case 7:
+                        BApp.saveJson();
                         break;
                 }
             }
