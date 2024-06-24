@@ -1,5 +1,4 @@
 package jsonexample.jsonexample;
-
 import lombok.Getter;
 import lombok.Setter;
 
