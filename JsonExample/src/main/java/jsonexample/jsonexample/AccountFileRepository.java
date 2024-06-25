@@ -5,7 +5,11 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 public class AccountFileRepository implements AccountRepository {
-    private static final String fileName = "data.txt";
+    private String fileName;
+
+    public AccountFileRepository(String filename) {
+        fileName = filename;
+    }
 
     @Override
     public void loadJson(List<Account> accountList) throws Exception {

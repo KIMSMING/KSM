@@ -98,17 +98,18 @@ public class BankApplication {
     }
 
     public static void main(String[] args) {
-        if ( args.length < 1 ) {
-            System.out.println("execute BankApplication -j or -t");
+        if ( args.length < 2 ) {
+            System.out.println("Execute BankApplication -j/-t filename");
             return;
         }
+        String fileName = args[1];
         AccountRepository repository;
         if ( "-j".equals(args[0]) ) {
-            repository = new AccountJSONRepository();
+            repository = new AccountJSONRepository(fileName);
         } else if ( "-t".equals(args[0]) ) {
-            repository = new AccountFileRepository();
+            repository = new AccountFileRepository(fileName);
         } else {
-            System.out.println("execute BankApplication -j or -t");
+            System.out.println("Execute BankApplication -j/-t filename");
             return;
         }
         BankApplication bapp = new BankApplication(repository);

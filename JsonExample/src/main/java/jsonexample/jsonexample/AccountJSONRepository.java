@@ -11,8 +11,11 @@ import java.nio.charset.Charset;
 import java.util.List;
 
 public class AccountJSONRepository implements AccountRepository {
-    private static final String fileName = "data.json";
+    private String fileName;
 
+    public AccountJSONRepository(String fileName) {
+        this.fileName = fileName;
+    }
     @Override
     public void loadJson(List<Account> accountList) throws Exception {
         if ( accountList == null ) {
