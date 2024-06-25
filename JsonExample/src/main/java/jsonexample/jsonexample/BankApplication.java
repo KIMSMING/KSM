@@ -4,7 +4,11 @@ import java.util.Scanner;
 
 public class BankApplication {
     private AccountService accountService = new AccountService();
-    private AccountRepository accountRepository = new AccountRepository();
+    private AccountRepository accountRepository;
+
+    public BankApplication(AccountRepository repository) {
+        this.accountRepository =  repository;
+    }
 
     private void printHeader() {
         System.out.println("=====================================");
@@ -94,7 +98,20 @@ public class BankApplication {
     }
 
     public static void main(String[] args) {
-        BankApplication bapp = new BankApplication();
+        if ( args.length < 1 ) {
+            System.out.println("execute BankApplication -j or -t");
+            return;
+        }
+        AccountRepository repository;
+        if ( "-j".equals(args[0]) ) {
+            repository = new AccountJSONRepository();
+        } else if ( "-t".equals(args[0]) ) {
+            repository = new AccountFileRepository();
+        } else {
+            System.out.println("execute BankApplication -j or -t");
+            return;
+        }
+        BankApplication bapp = new BankApplication(repository);
         Scanner input = new Scanner(System.in);
         boolean run = true;
 
