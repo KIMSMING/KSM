@@ -10,9 +10,6 @@ public class Account {
     private String bankNumber;
     private int current;
 
-    /**
-     * 계좌 (Account) 기본 생성자
-     */
     public Account() {
         this.name = "";
         this.bankNumber = "";
