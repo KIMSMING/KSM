@@ -21,7 +21,7 @@ public class PhoneBookJSONRepository implements IPhoneBookRepository<IPhoneBook>
             throw new Exception("Error : Input JsonObject is null");
         }
         IPhoneBook object = new PhoneBook();
-        object.setId((Long)jsonObject.get("ID"));
+        object.setId((Long)jsonObject.get("id"));
         object.setName((String)jsonObject.get("name"));
         object.setGroup((EPhoneGroup.valueOf((String)jsonObject.get("group"))));
         object.setPhoneNumber((String)jsonObject.get("phoneNumber"));

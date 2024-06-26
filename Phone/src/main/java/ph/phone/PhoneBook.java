@@ -1,13 +1,11 @@
 package ph.phone;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
 @Builder
+@NoArgsConstructor
 @AllArgsConstructor
 public class PhoneBook implements IPhoneBook{
     private Long id;
@@ -15,10 +13,6 @@ public class PhoneBook implements IPhoneBook{
     private EPhoneGroup group;
     private String phoneNumber;
     private String email;
-
-    public PhoneBook() {
-
-    }
 
     @Override
     public String toString() {

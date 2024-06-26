@@ -1,13 +1,10 @@
-package ph.phone;
-
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-@SpringBootApplication
-public class PhoneApplication {
-
-    public static void main(String[] args) {
-        SpringApplication.run(PhoneApplication.class, args);
-    }
-
-}
+//package ph.phone;
+//
+//import org.springframework.boot.SpringApplication;
+//public class PhoneApplication {
+//
+//    public static void main(String[] args) {
+//
+//    }
+//
+//}
