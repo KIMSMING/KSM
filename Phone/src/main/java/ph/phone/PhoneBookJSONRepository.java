@@ -77,7 +77,7 @@ public class PhoneBookJSONRepository implements IPhoneBookRepository<IPhoneBook>
         JSONParser parser = new JSONParser();
         File file = new File(fileName);
         if ( !file.exists() ) {
-            return false; // 파일이 없을때 실행하면 예외 없도록 처리함
+            return true; // 파일이 없을때 실행하면 예외 없도록 처리함
         }
         FileReader reader = new FileReader(file, Charset.defaultCharset());
         JSONObject jsonObject = (JSONObject) parser.parse(reader);

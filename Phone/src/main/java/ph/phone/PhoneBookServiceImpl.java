@@ -1,6 +1,7 @@
 package ph.phone;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class PhoneBookServiceImpl implements IPhoneBookService<IPhoneBook> {
     private List<IPhoneBook> list = new ArrayList<>();
@@ -27,13 +28,13 @@ public class PhoneBookServiceImpl implements IPhoneBookService<IPhoneBook> {
      */
     @Override
     public Long getMaxId() {
-        Long nMax = 0L;
-        for ( IPhoneBook obj : this.list ) {
-            if ( nMax < obj.getId() ) {
-                nMax = obj.getId();
-            }
+        Long maxId = Long.MIN_VALUE; // 가장 작은 값으로 초기화합니다.
+
+        for (IPhoneBook obj : this.list) {
+            maxId = Math.max(maxId, obj.getId());
         }
-        return ++nMax;
+
+        return maxId + 1; // 최대값보다 1 큰 값을 반환합니다.
     }
 
     @Override
@@ -118,57 +119,57 @@ public class PhoneBookServiceImpl implements IPhoneBookService<IPhoneBook> {
     }
 
     private int findIndexById(Long id) {
-        for ( int i = 0; i < this.list.size(); i++ ) {
-            if ( id.equals(this.list.get(i).getId()) ) {
-                return i;
+        int low = 0;
+        int high = this.list.size() - 1;
+
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+            IPhoneBook midObj = this.list.get(mid);
+
+            if (id.equals(midObj.getId())) {
+                return mid;
+            } else if (id < midObj.getId()) {
+                high = mid - 1;
+            } else {
+                low = mid + 1;
             }
         }
+
         return -1;
     }
 
+
     @Override
     public List<IPhoneBook> getListFromName(String findName) {
-        List<IPhoneBook> findArr = new ArrayList<>();
-        for ( IPhoneBook phoneBook : this.list ) {
-            if (phoneBook.getName().contains(findName)) {
-                findArr.add(phoneBook);
-            }
-        }
-        return findArr;
+        return this.list.stream()
+                .filter(phoneBook -> phoneBook.getName().contains(findName)) // 이름에 찾고자 하는 문자열이 포함된 객체를 필터링
+                .collect(Collectors.toList()); // 필터링된 객체들을 리스트로 수집
     }
+
 
     @Override
     public List<IPhoneBook> getListFromGroup(EPhoneGroup phoneGroup) {
-        List<IPhoneBook> findArr = new ArrayList<>();
-        for ( IPhoneBook phoneBook : this.list ) {
-            if (phoneGroup.equals(phoneBook.getGroup())) {
-                findArr.add(phoneBook);
-            }
-        }
-        return findArr;
+        return this.list.stream()
+                .filter(phoneBook -> phoneGroup.equals(phoneBook.getGroup()))
+                .collect(Collectors.toList()); // 필터링된 객체들을 리스트로 수집
     }
+
 
     @Override
     public List<IPhoneBook> getListFromPhoneNumber(String findPhone) {
-        List<IPhoneBook> findArr = new ArrayList<>();
-        for ( IPhoneBook phoneBook : this.list ) {
-            if (phoneBook.getPhoneNumber().contains(findPhone)) {
-                findArr.add(phoneBook);
-            }
-        }
-        return findArr;
+        return this.list.stream()
+                .filter(phoneBook -> phoneBook.getPhoneNumber().contains(findPhone))
+                .collect(Collectors.toList());
     }
+
 
     @Override
     public List<IPhoneBook> getListFromEmail(String findEmail) {
-        List<IPhoneBook> findArr = new ArrayList<>();
-        for ( IPhoneBook phoneBook : this.list ) {
-            if (phoneBook.getEmail().contains(findEmail)) {
-                findArr.add(phoneBook);
-            }
-        }
-        return findArr;
+        return this.list.stream()
+                .filter(phoneBook -> phoneBook.getEmail() .contains(findEmail))
+                .collect(Collectors.toList());
     }
+
 
     @Override
     public boolean loadData() throws Exception {

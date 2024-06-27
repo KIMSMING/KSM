@@ -5,6 +5,8 @@ import java.util.Scanner;
 
 public class ConsoleApplication {
     private IPhoneBookService<IPhoneBook> phoneBookService;
+    private static EPhoneGroup currentGroup = EPhoneGroup.Friends;
+
     public void setPhoneBookService(IPhoneBookService<IPhoneBook> phoneBookService) throws Exception {
         this.phoneBookService = phoneBookService;
         this.phoneBookService.loadData();
@@ -20,9 +22,22 @@ public class ConsoleApplication {
     }
 
     public int getChoice(Scanner input) throws Exception {
-        System.out.print("선택 > ");
-        String a = input.nextLine();
-        return Integer.parseInt(a);
+        int choice = 0;
+        while (true) {
+            try {
+                System.out.print("선택 > ");
+                String choiceStr = input.nextLine();
+                choice = Integer.parseInt(choiceStr);
+                if (choice >= 1) {
+                    break;
+                } else {
+                    System.out.println("1보다 큰 정수를 입력하세요.");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("올바른 정수를 입력하세요.");
+            }
+        }
+        return choice;
     }
 
     public void printList() {
@@ -31,17 +46,23 @@ public class ConsoleApplication {
 
     private EPhoneGroup getGroupFromScanner(Scanner input, String title) {
         boolean doWhile = false;
-        EPhoneGroup eGroup = EPhoneGroup.Friends;
+        EPhoneGroup eGroup = currentGroup;
+
         do {
-            System.out.print(title + "연락처 그룹{Friends(1),Families(2),Schools(3),Jobs(4),Hobbies(5)} :");
-            String group = input.nextLine();
+            System.out.print(title + "연락처 그룹{Friends(1),Families(2),Schools(3),Jobs(4),Hobbies(5)} (엔터 입력시 기존값 유지):");
+            String group = input.nextLine().trim();
+
+            if (group.isEmpty()) {
+                return eGroup;
+            }
+
             switch (group) {
                 case "1":
                     eGroup = EPhoneGroup.Friends;
                     doWhile = false;
                     break;
                 case "2":
-                    eGroup = EPhoneGroup.valueOf("Families");
+                    eGroup = EPhoneGroup.Families;
                     doWhile = false;
                     break;
                 case "3":
@@ -58,10 +79,13 @@ public class ConsoleApplication {
                     break;
                 default:
                     doWhile = true;
-                    System.out.println("Friends(1),Families(2),Schools(3),Jobs(4),Hobbies(5) 1~5사이에 입력");
+                    System.out.println("Friends(1),Families(2),Schools(3),Jobs(4),Hobbies(5) 중에서 선택하세요.");
                     break;
             }
         } while (doWhile);
+
+        currentGroup = eGroup;
+
         return eGroup;
     }
 
@@ -71,12 +95,22 @@ public class ConsoleApplication {
         System.out.println("--------");
         System.out.print("연락처 이름 :");
         String name = input.nextLine();
+        if(name.isEmpty()){
+            System.out.println("이름을 입력하세요");
+            return;
+        }
         try {
             Integer.parseInt(name);
             System.out.println("이름은 숫자가 아니어야 합니다.");
             return;
         } catch (NumberFormatException e) {}
+
         EPhoneGroup group = this.getGroupFromScanner(input, "");
+        if (group == null) {
+            System.out.println("그룹을 입력하지 않았습니다.");
+            return;
+        }
+
         System.out.print("전화번호 :");
         String phone = input.nextLine();
         try {
@@ -89,9 +123,13 @@ public class ConsoleApplication {
             System.out.println("전화번호는 숫자로 입력해야 합니다");
             return;
         }
+
         System.out.print("이메일 :");
         String email = input.nextLine();
-
+        if(email.isEmpty()){
+            System.out.println(("이메일을 입력하세요"));
+            return;
+        }
         if (this.phoneBookService.insert(name, group, phone, email)) {
             this.phoneBookService.saveData();
             System.out.println("결과: 데이터 추가 성공되었습니다.");
@@ -101,35 +139,47 @@ public class ConsoleApplication {
     public void update(Scanner input) throws Exception {
         IPhoneBook result = getFindIdConsole(input, "수정할");
         if (result == null) {
-            System.out.println("에러: ID 데이터 가 존재하지 않습니다.");
+            System.out.println("에러: ID 데이터가 존재하지 않습니다.");
             return;
         }
-        System.out.print("연락처 이름 :");
+
+        System.out.print("연락처 이름 (변경하지 않으려면 엔터) : ");
         String name = input.nextLine();
-        try {
-            Integer.parseInt(name);
-            System.out.println("이름은 숫자가 아니어야 합니다.");
-            return;
-        } catch (NumberFormatException e) {}
+        if (name.isEmpty()) {
+            name = result.getName();
+        } else {
+            try {
+                Integer.parseInt(name);
+                System.out.println("이름은 숫자가 아니어야 합니다.");
+                return;
+            } catch (NumberFormatException e) {}
+        }
+
         EPhoneGroup group = this.getGroupFromScanner(input, "");
-        System.out.print("전화번호 :");
+
+        System.out.print("전화번호 (변경하지 않으려면 엔터) : ");
         String phone = input.nextLine();
-        try {
-            int phoneNumber = Integer.parseInt(phone);
-            if (phoneNumber <= 0) {
-                System.out.println("전화번호는 1 이상의 숫자를 입력하세요");
+        if (phone.isEmpty()) {
+            phone = result.getPhoneNumber();
+        } else {
+            try {
+                int phoneNumber = Integer.parseInt(phone);
+                if (phoneNumber <= 0) {
+                    System.out.println("전화번호는 1 이상의 숫자를 입력하세요");
+                    return;
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("전화번호는 숫자로 입력해야 합니다");
                 return;
             }
-        } catch (NumberFormatException e) {
-            System.out.println("전화번호는 숫자로 입력해야 합니다");
-            return;
         }
-        System.out.print("이메일 :");
+
+        System.out.print("이메일 (변경하지 않으려면 엔터) : ");
         String email = input.nextLine();
-        if ( Integer.parseInt(phone) <= 0 ){
-            System.out.println("phone 1 이상의 숫자를 입력하세요");
-            return;
+        if (email.isEmpty()) {
+            email = result.getEmail();
         }
+
         IPhoneBook update = PhoneBook.builder()
                 .id(result.getId()).name(name)
                 .group(group)
@@ -143,7 +193,7 @@ public class ConsoleApplication {
     public void delete(Scanner input) throws Exception {
         IPhoneBook result = getFindIdConsole(input, "삭제할");
         if (result == null) {
-            System.out.println("에러: ID 데이터 가 존재하지 않습니다.");
+            System.out.println("에러: ID 데이터가 존재하지 않습니다.");
             return;
         }
         if (this.phoneBookService.remove(result.getId())) {
@@ -164,8 +214,8 @@ public class ConsoleApplication {
             } catch (Exception ex) {
                 System.out.println("ID 번호를 숫자로만 입력하세요.");
             }
-        } while ( l <= 0 );
-        IPhoneBook iPhoneBook = (IPhoneBook)this.phoneBookService.findById(l);
+        } while (l <= 0);
+        IPhoneBook iPhoneBook = (IPhoneBook) this.phoneBookService.findById(l);
         return iPhoneBook;
     }
 
@@ -186,7 +236,6 @@ public class ConsoleApplication {
         }
         this.printList(list);
     }
-
 
     public void searchByGroup(Scanner input) {
         EPhoneGroup group = this.getGroupFromScanner(input, "찾을 ");
