@@ -38,9 +38,11 @@ public class PhoneBookRepositoryTests {
         JSONObject jobject = repository.getJsonFromObject((iPhoneBook2));
         assertThat((Long) jobject.get("id")).isEqualTo(12L);
         assertThat((String) jobject.get("name")).isEqualTo("홍길동");
-        assertThat((EPhoneGroup) jobject.get("group")).isEqualTo(EPhoneGroup.Hobbies);
+        assertThat((String) jobject.get("group")).isEqualTo("Hobbies");
+        assertThat(EPhoneGroup.valueOf((String)jobject.get("group"))).isEqualTo(EPhoneGroup.Hobbies);
         assertThat((String) jobject.get("phoneNumber")).isEqualTo("1111-2134");
         assertThat((String) jobject.get("email")).isEqualTo("asdqwegvgg@asd.com");
+        assertThat(jobject.toString()).isEqualTo("{\"phoneNumber\":\"1111-2134\",\"name\":\"홍길동\",\"id\":12,\"email\":\"asdqwegvgg@asd.com\",\"group\":\"Hobbies\"}");
     }
 
     @Test
@@ -53,11 +55,12 @@ public class PhoneBookRepositoryTests {
         assertThat(phoneBook.getId()).isEqualTo(3L);
         assertThat(phoneBook.getName()).isEqualTo("안순정");
         assertThat(phoneBook.getGroup()).isEqualTo(EPhoneGroup.Jobs);
+        assertThat(phoneBook.getGroup().toString()).isEqualTo("Jobs");
         assertThat(phoneBook.getPhoneNumber()).isEqualTo("010-1111-9999");
         assertThat(phoneBook.getEmail()).isEqualTo("ahns@gmail.com");
 
         String str = repository.getTextFromObject(phoneBook);
-        assertThat(str).isEqualTo("3, 안순정, Jobs, 010-1111-9999, ahns@gmail.com\n");
+        assertThat(str).isEqualTo("3,안순정,Jobs,010-1111-9999,ahns@gmail.com\n");
 
 
     }

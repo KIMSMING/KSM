@@ -15,6 +15,6 @@ public interface IPhoneBookService<T> {
     List<T> getListFromGroup(EPhoneGroup phoneGroup);
     List<T> getListFromPhoneNumber(String findPhone);
     List<T> getListFromEmail(String findEmail);
-    void loadData() throws Exception;
-    void saveData() throws Exception;
+    boolean loadData() throws Exception;
+    boolean saveData() throws Exception;
 }

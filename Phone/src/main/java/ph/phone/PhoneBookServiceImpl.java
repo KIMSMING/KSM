@@ -142,12 +142,12 @@ public class PhoneBookServiceImpl implements IPhoneBookService<IPhoneBook> {
     }
 
     @Override
-    public void loadData() throws Exception {
-        this.phoneBookRepository.loadData(this.list);
+    public boolean loadData() throws Exception {
+        return this.phoneBookRepository.loadData(this.list);
     }
 
     @Override
-    public void saveData() throws Exception {
-        this.phoneBookRepository.saveData(this.list);
+    public boolean saveData() throws Exception {
+        return this.phoneBookRepository.saveData(this.list);
     }
 }
