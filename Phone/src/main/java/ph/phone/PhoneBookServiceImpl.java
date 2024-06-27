@@ -38,9 +38,19 @@ public class PhoneBookServiceImpl implements IPhoneBookService<IPhoneBook> {
 
     @Override
     public IPhoneBook findById(Long id) {
-        for ( IPhoneBook obj : this.list ) {
-            if ( id.equals(obj.getId()) ) {
-                return obj;
+        int low = 0;
+        int high = this.list.size() - 1;
+
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+            IPhoneBook midObj = this.list.get(mid);
+
+            if (id.equals(midObj.getId())) {
+                return midObj;
+            } else if (id < midObj.getId()) {
+                high = mid - 1;
+            } else {
+                low = mid + 1;
             }
         }
         return null;
@@ -53,6 +63,11 @@ public class PhoneBookServiceImpl implements IPhoneBookService<IPhoneBook> {
 
     @Override
     public boolean insert(String name, EPhoneGroup group, String phoneNumber, String email) throws Exception {
+        if (isNameDuplicate(name)) {
+            System.out.println("이미 존재하는 이름입니다");
+            return false;
+        }
+
         IPhoneBook phoneBook = PhoneBook.builder()
                 .id(this.getMaxId())
                 .name(name).group(group)
@@ -63,8 +78,22 @@ public class PhoneBookServiceImpl implements IPhoneBookService<IPhoneBook> {
 
     @Override
     public boolean insert(IPhoneBook phoneBook) throws Exception {
+        if (isNameDuplicate(phoneBook.getName())) {
+            System.out.println("이미 존재하는 이름입니다");
+            return false;
+        }
+
         this.list.add(phoneBook);
         return true;
+    }
+
+    private boolean isNameDuplicate(String name) {
+        for (IPhoneBook contact : list) {
+            if (contact.getName().equals(name)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
