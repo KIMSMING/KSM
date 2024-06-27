@@ -71,9 +71,24 @@ public class ConsoleApplication {
         System.out.println("--------");
         System.out.print("연락처 이름 :");
         String name = input.nextLine();
+        try {
+            Integer.parseInt(name);
+            System.out.println("이름은 숫자가 아니어야 합니다.");
+            return;
+        } catch (NumberFormatException e) {}
         EPhoneGroup group = this.getGroupFromScanner(input, "");
         System.out.print("전화번호 :");
         String phone = input.nextLine();
+        try {
+            int phoneNumber = Integer.parseInt(phone);
+            if (phoneNumber <= 0) {
+                System.out.println("전화번호는 1 이상의 숫자를 입력하세요");
+                return;
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("전화번호는 숫자로 입력해야 합니다");
+            return;
+        }
         System.out.print("이메일 :");
         String email = input.nextLine();
 
@@ -91,11 +106,30 @@ public class ConsoleApplication {
         }
         System.out.print("연락처 이름 :");
         String name = input.nextLine();
+        try {
+            Integer.parseInt(name);
+            System.out.println("이름은 숫자가 아니어야 합니다.");
+            return;
+        } catch (NumberFormatException e) {}
         EPhoneGroup group = this.getGroupFromScanner(input, "");
         System.out.print("전화번호 :");
         String phone = input.nextLine();
+        try {
+            int phoneNumber = Integer.parseInt(phone);
+            if (phoneNumber <= 0) {
+                System.out.println("전화번호는 1 이상의 숫자를 입력하세요");
+                return;
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("전화번호는 숫자로 입력해야 합니다");
+            return;
+        }
         System.out.print("이메일 :");
         String email = input.nextLine();
+        if ( Integer.parseInt(phone) <= 0 ){
+            System.out.println("phone 1 이상의 숫자를 입력하세요");
+            return;
+        }
         IPhoneBook update = PhoneBook.builder()
                 .id(result.getId()).name(name)
                 .group(group)
@@ -146,8 +180,13 @@ public class ConsoleApplication {
         String name = input.nextLine();
 
         List<IPhoneBook> list = this.phoneBookService.getListFromName(name);
+        if (list.isEmpty()) {
+            System.out.println("해당 이름이 없습니다, 목록을 확인하세요 ");
+            return;
+        }
         this.printList(list);
     }
+
 
     public void searchByGroup(Scanner input) {
         EPhoneGroup group = this.getGroupFromScanner(input, "찾을 ");
@@ -161,6 +200,10 @@ public class ConsoleApplication {
         String findPhone = input.nextLine();
 
         List<IPhoneBook> list = this.phoneBookService.getListFromPhoneNumber(findPhone);
+        if (list.isEmpty()) {
+            System.out.println("해당 번호가 없습니다, 목록을 확인하세요 ");
+            return;
+        }
         this.printList(list);
     }
 
@@ -169,6 +212,10 @@ public class ConsoleApplication {
         String findEmail = input.nextLine();
 
         List<IPhoneBook> list = this.phoneBookService.getListFromEmail(findEmail);
+        if (list.isEmpty()) {
+            System.out.println("해당 이메일 없습니다, 목록을 확인하세요 ");
+            return;
+        }
         this.printList(list);
     }
 }
