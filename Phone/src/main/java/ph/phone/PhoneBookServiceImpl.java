@@ -28,17 +28,16 @@ public class PhoneBookServiceImpl implements IPhoneBookService<IPhoneBook> {
      */
     @Override
     public Long getMaxId() {
-        Long maxId = Long.MIN_VALUE; // 가장 작은 값으로 초기화합니다.
+        Long maxId = Long.MIN_VALUE;
 
         for (IPhoneBook obj : this.list) {
             maxId = Math.max(maxId, obj.getId());
         }
 
-        return maxId + 1; // 최대값보다 1 큰 값을 반환합니다.
+        return maxId + 1;
     }
 
-    @Override
-    public IPhoneBook findById(Long id) {
+    private Object binarySearchById(Long id, boolean result){
         int low = 0;
         int high = this.list.size() - 1;
 
@@ -54,7 +53,14 @@ public class PhoneBookServiceImpl implements IPhoneBookService<IPhoneBook> {
                 low = mid + 1;
             }
         }
-        return null;
+        return result ? -1 : null;
+    }
+    @Override
+    public IPhoneBook findById(Long id) {
+        return (IPhoneBook)binarySearchById( id, false );
+    }
+    private int findIndexById(Long id) {
+        return (int)binarySearchById( id, true) ;
     }
 
     @Override
@@ -118,32 +124,11 @@ public class PhoneBookServiceImpl implements IPhoneBookService<IPhoneBook> {
         return false;
     }
 
-    private int findIndexById(Long id) {
-        int low = 0;
-        int high = this.list.size() - 1;
-
-        while (low <= high) {
-            int mid = low + (high - low) / 2;
-            IPhoneBook midObj = this.list.get(mid);
-
-            if (id.equals(midObj.getId())) {
-                return mid;
-            } else if (id < midObj.getId()) {
-                high = mid - 1;
-            } else {
-                low = mid + 1;
-            }
-        }
-
-        return -1;
-    }
-
-
     @Override
     public List<IPhoneBook> getListFromName(String findName) {
         return this.list.stream()
-                .filter(phoneBook -> phoneBook.getName().contains(findName)) // 이름에 찾고자 하는 문자열이 포함된 객체를 필터링
-                .collect(Collectors.toList()); // 필터링된 객체들을 리스트로 수집
+                .filter(phoneBook -> phoneBook.getName().contains(findName))
+                .collect(Collectors.toList());
     }
 
 
@@ -151,7 +136,7 @@ public class PhoneBookServiceImpl implements IPhoneBookService<IPhoneBook> {
     public List<IPhoneBook> getListFromGroup(EPhoneGroup phoneGroup) {
         return this.list.stream()
                 .filter(phoneBook -> phoneGroup.equals(phoneBook.getGroup()))
-                .collect(Collectors.toList()); // 필터링된 객체들을 리스트로 수집
+                .collect(Collectors.toList());
     }
 
 

@@ -13,6 +13,7 @@ public class ConsoleApplication {
     }
 
     public ConsoleApplication() {
+
     }
 
     public void printTitle() {
@@ -44,15 +45,16 @@ public class ConsoleApplication {
         this.printList(this.phoneBookService.getAllList());
     }
 
-    private EPhoneGroup getGroupFromScanner(Scanner input, String title) {
+    private EPhoneGroup getGroupFromScanner(Scanner input, String title, boolean allowEmpty) {
         boolean doWhile = false;
         EPhoneGroup eGroup = currentGroup;
 
         do {
-            System.out.print(title + "연락처 그룹{Friends(1),Families(2),Schools(3),Jobs(4),Hobbies(5)} (엔터 입력시 기존값 유지):");
+            System.out.print(title + "연락처 그룹{Friends(1),Families(2),Schools(3),Jobs(4),Hobbies(5)}" +
+                    (allowEmpty ? " (엔터 입력시 기존값 유지) : " : " : "));
             String group = input.nextLine().trim();
 
-            if (group.isEmpty()) {
+            if (group.isEmpty() && allowEmpty) {
                 return eGroup;
             }
 
@@ -93,7 +95,7 @@ public class ConsoleApplication {
         System.out.println("--------");
         System.out.println("연락처 생성");
         System.out.println("--------");
-        System.out.print("연락처 이름 :");
+        System.out.print("연락처 이름 : ");
         String name = input.nextLine();
         if(name.isEmpty()){
             System.out.println("이름을 입력하세요");
@@ -105,13 +107,13 @@ public class ConsoleApplication {
             return;
         } catch (NumberFormatException e) {}
 
-        EPhoneGroup group = this.getGroupFromScanner(input, "");
+        EPhoneGroup group = this.getGroupFromScanner(input, "", false);
         if (group == null) {
             System.out.println("그룹을 입력하지 않았습니다.");
             return;
         }
 
-        System.out.print("전화번호 :");
+        System.out.print("전화번호( '-' 없이 입력하세요 ) : ");
         String phone = input.nextLine();
         try {
             int phoneNumber = Integer.parseInt(phone);
@@ -124,7 +126,7 @@ public class ConsoleApplication {
             return;
         }
 
-        System.out.print("이메일 :");
+        System.out.print("이메일 : ");
         String email = input.nextLine();
         if(email.isEmpty()){
             System.out.println(("이메일을 입력하세요"));
@@ -155,9 +157,9 @@ public class ConsoleApplication {
             } catch (NumberFormatException e) {}
         }
 
-        EPhoneGroup group = this.getGroupFromScanner(input, "");
+        EPhoneGroup group = this.getGroupFromScanner(input, "", true);
 
-        System.out.print("전화번호 (변경하지 않으려면 엔터) : ");
+        System.out.print("전화번호 (변경하지 않으려면 엔터) / (변경하려면 '-' 없이 입력하세요) : ");
         String phone = input.nextLine();
         if (phone.isEmpty()) {
             phone = result.getPhoneNumber();
@@ -207,7 +209,7 @@ public class ConsoleApplication {
     private IPhoneBook getFindIdConsole(Scanner input, String title) {
         long l = 0L;
         do {
-            System.out.print(title + " ID 번호:");
+            System.out.print(title + " ID 번호 : ");
             String id = input.nextLine();
             try {
                 l = Long.parseLong(id);
@@ -226,7 +228,7 @@ public class ConsoleApplication {
     }
 
     public void searchByName(Scanner input) {
-        System.out.print("찾을 이름 :");
+        System.out.print("찾을 이름 : ");
         String name = input.nextLine();
 
         List<IPhoneBook> list = this.phoneBookService.getListFromName(name);
@@ -238,14 +240,14 @@ public class ConsoleApplication {
     }
 
     public void searchByGroup(Scanner input) {
-        EPhoneGroup group = this.getGroupFromScanner(input, "찾을 ");
+        EPhoneGroup group = this.getGroupFromScanner(input, "찾을 ", false);
 
         List<IPhoneBook> list = this.phoneBookService.getListFromGroup(group);
         this.printList(list);
     }
 
     public void searchByPhone(Scanner input) {
-        System.out.print("찾을 번호 :");
+        System.out.print("찾을 번호 : ");
         String findPhone = input.nextLine();
 
         List<IPhoneBook> list = this.phoneBookService.getListFromPhoneNumber(findPhone);
@@ -257,7 +259,7 @@ public class ConsoleApplication {
     }
 
     public void searchByEmail(Scanner input) {
-        System.out.print("찾을 Email :");
+        System.out.print("찾을 Email : ");
         String findEmail = input.nextLine();
 
         List<IPhoneBook> list = this.phoneBookService.getListFromEmail(findEmail);
