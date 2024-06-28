@@ -55,6 +55,7 @@ public class PhoneBookServiceImpl implements IPhoneBookService<IPhoneBook> {
         }
         return result ? -1 : null;
     }
+
     @Override
     public IPhoneBook findById(Long id) {
         return (IPhoneBook)binarySearchById( id, false );
