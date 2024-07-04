@@ -1,10 +1,8 @@
 
 package data.data;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 @Getter
@@ -13,14 +11,26 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(schema = "phonebook")
+@Table(schema = "PhoneBook")
 public class PhoneBookEntity implements IPhoneBook{
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotNull
+    @Column(length = 50, unique = true)
     private String name;
+
+    @NotNull
+    @Column(length = 10)
     private String category;
+
+    @NotNull
+    @Column(length = 20)
     private String phoneNumber;
+
+    @NotNull
+    @Column(length = 200)
     private String email;
 
     @Override
