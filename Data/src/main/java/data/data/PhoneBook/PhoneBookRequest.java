@@ -1,4 +1,4 @@
-package data.data;
+package data.data.PhoneBook;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.validation.constraints.NotBlank;

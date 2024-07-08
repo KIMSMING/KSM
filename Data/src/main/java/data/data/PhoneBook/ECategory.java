@@ -1,4 +1,4 @@
-package data.data;
+package data.data.PhoneBook;
 
 public enum ECategory {
     Friends(0),

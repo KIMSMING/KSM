@@ -1,4 +1,4 @@
-package data.data;
+package data.data.PhoneBook;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
