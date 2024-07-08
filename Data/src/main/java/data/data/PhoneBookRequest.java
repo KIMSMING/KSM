@@ -1,5 +1,6 @@
 package data.data;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
@@ -9,6 +10,7 @@ import lombok.Setter;
 @Setter
 
 public class PhoneBookRequest implements IPhoneBook{
+    @JsonIgnore
     private Long id;
 
     @NotBlank

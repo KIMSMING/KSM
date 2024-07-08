@@ -10,7 +10,7 @@ public interface IPhoneBookService<T> {
     boolean remove(Long id) throws Exception;
     IPhoneBook update(Long id, T phoneBook) throws Exception;
     List<T> getListFromName(String findName);
-    List<T> getListFromGroup(ECategory phoneGroup);
+    List<T> getListFromCategory(String phoneGroup);
     List<T> getListFromPhoneNumber(String findPhone);
     List<T> getListFromEmail(String findEmail);
 }

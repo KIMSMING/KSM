@@ -61,16 +61,106 @@ public class PhoneBookController {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<IPhoneBook> update(@PathVariable Long id, @RequestBody PhoneBookRequest dto){
+    public ResponseEntity<IPhoneBook> update(@PathVariable Long id, @RequestBody PhoneBookRequest dto) {
         try {
-            if ( id == null || dto == null){
+            if ( id == null || dto == null ) {
                 return ResponseEntity.badRequest().build();
             }
             IPhoneBook result = this.phoneBookService.update(id, dto);
+            if ( result == null ) {
+                return ResponseEntity.notFound().build();
+            }
             return ResponseEntity.ok(result);
-        } catch ( Exception ex ){
+        } catch ( Exception ex ) {
             logger.error(ex.toString());
             return ResponseEntity.badRequest().build();
         }
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<IPhoneBook> findById(@PathVariable Long id) {
+        try {
+            if ( id == null || id <= 0 ) {
+                return ResponseEntity.badRequest().build();
+            }
+            IPhoneBook result = this.phoneBookService.findById(id);
+            if ( result == null ) {
+                return ResponseEntity.notFound().build();
+            }
+            return ResponseEntity.ok(result);
+        } catch ( Exception ex ) {
+            logger.error(ex.toString());
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
+    @GetMapping("/nm/{name}")
+    public ResponseEntity<List<IPhoneBook>> findByName(@PathVariable String name) {
+        try {
+            if ( name == null || name.isEmpty() ) {
+                return ResponseEntity.badRequest().build();
+            }
+            List<IPhoneBook> result = this.phoneBookService.getListFromName(name);
+            if ( result == null || result.size() <= 0 ) {
+                return ResponseEntity.notFound().build();
+            }
+            return ResponseEntity.ok(result);
+        } catch ( Exception ex ) {
+            logger.error(ex.toString());
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
+    @GetMapping("/ct/{category}")
+    public ResponseEntity<List<IPhoneBook>> findByCategory(@PathVariable String category) {
+        try {
+            if ( category == null || category.isEmpty() ) {
+                return ResponseEntity.badRequest().build();
+            }
+            List<IPhoneBook> result = this.phoneBookService.getListFromCategory(category);
+            if ( result == null || result.size() <= 0 ) {
+                return ResponseEntity.notFound().build();
+            }
+            return ResponseEntity.ok(result);
+        } catch ( Exception ex ) {
+            logger.error(ex.toString());
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
+    @GetMapping("/pn/{phoneNumber}")
+    public ResponseEntity<List<IPhoneBook>> findByPhoneNumber(@PathVariable String phoneNumber) {
+        try {
+            if ( phoneNumber == null || phoneNumber.isEmpty() ) {
+                return ResponseEntity.badRequest().build();
+            }
+            List<IPhoneBook> result = this.phoneBookService.getListFromPhoneNumber(phoneNumber);
+            if ( result == null || result.size() <= 0 ) {
+                return ResponseEntity.notFound().build();
+            }
+            return ResponseEntity.ok(result);
+        } catch ( Exception ex ) {
+            logger.error(ex.toString());
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
+    @GetMapping("/em/{email}")
+    public ResponseEntity<List<IPhoneBook>> findByEmail(@PathVariable String email) {
+        try {
+            if ( email == null || email.isEmpty() ) {
+                return ResponseEntity.badRequest().build();
+            }
+            List<IPhoneBook> result = this.phoneBookService.getListFromEmail(email);
+            if ( result == null || result.size() <= 0 ) {
+                return ResponseEntity.notFound().build();
+            }
+            return ResponseEntity.ok(result);
+        } catch ( Exception ex ) {
+            logger.error(ex.toString());
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
+
 }

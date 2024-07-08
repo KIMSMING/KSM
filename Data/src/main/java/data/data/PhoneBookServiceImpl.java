@@ -73,7 +73,26 @@ public class PhoneBookServiceImpl implements IPhoneBookService<IPhoneBook> {
     @Override
     public IPhoneBook update(Long id, IPhoneBook phoneBook) {
         IPhoneBook find = this.findById(id);
-        return null;
+        if ( find == null){
+            return null;
+        }
+        find.copyFields(phoneBook);
+        PhoneBookEntity result = this.phoneBookJpaRepository.saveAndFlush((PhoneBookEntity) find);
+        return result;
+    }
+
+    private List<IPhoneBook> getIPhoneBookList(List<PhoneBookEntity> list){
+        if( list == null || list.size() <=0){
+            return new ArrayList();
+        }
+//        List<IPhoneBook> result = list.stream()
+//                .map(item -> (IPhoneBook)item)
+//                .toList();
+        List<IPhoneBook> result = new ArrayList<>();
+        for ( PhoneBookEntity entity : list ){
+            result.add( (IPhoneBook) entity );
+        }
+        return result;
     }
 
     @Override
@@ -81,17 +100,23 @@ public class PhoneBookServiceImpl implements IPhoneBookService<IPhoneBook> {
         if(findName == null || findName.isEmpty()){
             return new ArrayList<>();
         }
-        return new ArrayList<>();
+        List<IPhoneBook> result = this.getIPhoneBookList(
+                this.phoneBookJpaRepository.findAllByNameContains(findName)
+        );
+        return result;
     }
 
 
 
     @Override
-    public List<IPhoneBook> getListFromGroup(ECategory category) {
+    public List<IPhoneBook> getListFromCategory(String category) {
         if ( category == null ){
             return new ArrayList<>();
         }
-        return new ArrayList<>();
+        List<IPhoneBook> result = this.getIPhoneBookList(
+                this.phoneBookJpaRepository.findAllByCategory(category)
+        );
+        return result;
     }
 
 
@@ -100,7 +125,10 @@ public class PhoneBookServiceImpl implements IPhoneBookService<IPhoneBook> {
         if(findPhone == null || findPhone.isEmpty()){
             return new ArrayList<>();
         }
-        return new ArrayList<>();
+        List<IPhoneBook> result = this.getIPhoneBookList(
+                this.phoneBookJpaRepository.findAllByPhoneNumberContains(findPhone)
+        );
+        return result;
     }
 
 
@@ -109,6 +137,9 @@ public class PhoneBookServiceImpl implements IPhoneBookService<IPhoneBook> {
         if (findEmail == null || findEmail.isEmpty()) {
             return new ArrayList<>();
         }
-        return new ArrayList<>();
+        List<IPhoneBook> result = this.getIPhoneBookList(
+                this.phoneBookJpaRepository.findAllByEmailContains(findEmail)
+        );
+        return result;
     }
 }
