@@ -14,7 +14,7 @@ import lombok.*;
 public class PhoneBookDto implements IPhoneBook{
     private Long id;
     private String name;
-    private String category;
+    private ECategory category;
     private String phoneNumber;
     private String email;
 

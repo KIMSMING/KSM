@@ -18,7 +18,7 @@ public class PhoneBookServiceImpl implements IPhoneBookService<IPhoneBook> {
             return false;
         }else if ( dto.getName() == null || dto.getName().isEmpty()){
             return false;
-        }else if ( dto.getCategory() == null || dto.getCategory().isEmpty()){
+        }else if ( dto.getCategory() == null ){
             return false;
         }
         return true;
@@ -41,7 +41,7 @@ public class PhoneBookServiceImpl implements IPhoneBookService<IPhoneBook> {
     }
 
     @Override
-    public IPhoneBook insert(String name, String category, String phoneNumber, String email) throws Exception {
+    public IPhoneBook insert(String name, ECategory category, String phoneNumber, String email) throws Exception {
         PhoneBookEntity phoneBook = PhoneBookEntity.builder()
                 .id(0L)
                 .name(name).category(category)
@@ -109,7 +109,7 @@ public class PhoneBookServiceImpl implements IPhoneBookService<IPhoneBook> {
 
 
     @Override
-    public List<IPhoneBook> getListFromCategory(String category) {
+    public List<IPhoneBook> getListFromCategory(ECategory category) {
         if ( category == null ){
             return new ArrayList<>();
         }

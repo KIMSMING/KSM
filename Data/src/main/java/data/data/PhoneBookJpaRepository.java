@@ -15,7 +15,7 @@ public interface PhoneBookJpaRepository extends JpaRepository<PhoneBookEntity, L
 
     // PhoneBookEntity JPA 로 연결된 데이터에서 Category 컬럼에서 category 가 같은 자료를 찾아서
     // 배열로 리턴하는 SQL 문장을 싱행하는 메소드를 사용한다.
-    List<PhoneBookEntity> findAllByCategory(String category);
+    List<PhoneBookEntity> findAllByCategory(ECategory category);
 
     // PhoneBookEntity JPA 로 연결된 데이터에서 phoneNumber 컬럼에서 phoneNumber 글자가 포함된 자료를 찾아서
     // 배열로 리턴하는 SQL 문장을 싱행하는 메소드를 사용한다.
