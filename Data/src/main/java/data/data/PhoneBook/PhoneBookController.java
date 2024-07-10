@@ -1,6 +1,6 @@
 package data.data.PhoneBook;
 
-import data.data.Category.CategoryDto;
+import data.data.Category.CategoryEntity;
 import data.data.Category.ICategory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -119,7 +119,7 @@ public class PhoneBookController {
             if ( category == null ) {
                 return ResponseEntity.badRequest().build();
             }
-            ICategory iCategory = CategoryDto.builder().id(category).build();
+            ICategory iCategory = CategoryEntity.builder().id(category).build();
             List<IPhoneBook> result = this.phoneBookService.getListFromCategory(iCategory);
             if ( result == null || result.size() <= 0 ) {
                 return ResponseEntity.notFound().build();

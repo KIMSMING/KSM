@@ -4,7 +4,7 @@ import data.data.PhoneBook.IPhoneBook;
 
 import java.io.Serializable;
 
-public interface ICategory extends Serializable {
+public interface ICategory{
     Long getId();
     void setId(Long id);
 
