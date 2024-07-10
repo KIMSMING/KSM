@@ -1,43 +1,44 @@
 package data.data.Category;
 
 import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.core.annotation.Order;
 
 import java.util.Optional;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @SpringBootTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class CategoryJpaRepositoryTest {
     @Autowired
-    private CategoryService categoryJpaRepository;
+    private CategoryJpaRepository categoryJpaRepository;
 
-    private void AssertFieldsTest(ICategory left, ICategory right){
+    private void AssertFields(ICategory left, ICategory right) {
         assertThat(left).isNotNull();
         assertThat(right).isNotNull();
         assertThat(left.getId()).isEqualTo(right.getId());
-        assertThat(left.getName()).isEqualTo((right).getName());
+        assertThat(left.getName()).isEqualTo(right.getName());
     }
+
     @Test
     @Order(1)
-    public void CategoryInsertTest(){
+    public void CategoryInsertTest() {
         CategoryEntity insert = CategoryEntity.builder()
-                .name("123123123123213123123").build();
-        Throwable exception = assertThrows(Exception.class, () ->{
-                categoryJpaRepository.save(insert);
-                });
+                .name("123456789012345678901").build();
+        Throwable exception = assertThrows(Exception.class, () -> {
+            categoryJpaRepository.save(insert);
+        });
         System.out.println(exception.toString());
 
         CategoryEntity insert2 = CategoryEntity.builder().build();
-        exception = assertThrows(Exception.class, () ->{
+        exception = assertThrows(Exception.class, () -> {
             categoryJpaRepository.save(insert2);
         });
         System.out.println(exception.toString());
@@ -52,53 +53,45 @@ public class CategoryJpaRepositoryTest {
 
     @Test
     @Order(2)
-    public void CategortFindTest(){
+    public void CategoryFindTest() {
         Optional<CategoryEntity> find1 = this.categoryJpaRepository.findById(0L);
         assertThat(find1.orElse(null)).isNull();
 
         Optional<CategoryEntity> find2 = this.categoryJpaRepository.findByName("abcdef");
         ICategory find2ICategory = find2.orElse(null);
-        assertThat(find2ICategory).isNotNull();
 
         Optional<CategoryEntity> find3 = this.categoryJpaRepository.findById(find2ICategory.getId());
         ICategory find3ICategory = find3.orElse(null);
-        assertThat(find3ICategory).isNotNull();
 
-        this.AssertFieldsTest(find3ICategory, find2ICategory);
-//        assertThat(find3ICategory.getId()).isEqualTo(find2ICategory.getId());
-//        assertThat(find3ICategory.getName()).isEqualTo(find2ICategory.getName());
-
+        this.AssertFields(find3ICategory, find2ICategory);
     }
 
     @Test
     @Order(3)
-    public void CategoryUpdateTest(){
+    public void CategoryUpdateTest() {
         Optional<CategoryEntity> find2 = this.categoryJpaRepository.findByName("abcdef");
         ICategory find2ICategory = find2.orElse(null);
-        assertThat(find2ICategory).isNotNull();
 
         find2ICategory.setName("ABCDEFGH");
-        ICategory save = this.categoryJpaRepository.save((CategoryEntity) find2ICategory);
+        ICategory save = this.categoryJpaRepository.save((CategoryEntity)find2ICategory);
 
-        Optional<CategoryEntity> find3 = this.categoryJpaRepository.findByName("abcdef");
+        Optional<CategoryEntity> find3 = this.categoryJpaRepository.findById(find2ICategory.getId());
         ICategory find3ICategory = find3.orElse(null);
-        assertThat(find3ICategory).isNotNull();
 
-        assertThat(find3ICategory.getId()).isEqualTo((find3ICategory).getId());
-        assertThat(find3ICategory.getName()).isEqualTo((find3ICategory).getName());
+        this.AssertFields(find3ICategory, find2ICategory);
     }
 
     @Test
     @Order(4)
-    public void CategoryDeleteTest(){
-        Optional<CategoryEntity> find2 = this.categoryJpaRepository.findByName("abcdef");
+    public void CategoryDeleteTest() {
+        Optional<CategoryEntity> find2 = this.categoryJpaRepository.findByName("ABCDEFGH");
         ICategory find2ICategory = find2.orElse(null);
         assertThat(find2ICategory).isNotNull();
 
         this.categoryJpaRepository.deleteById(find2ICategory.getId());
 
-        Optional<CategoryEntity> find3 = this.categoryJpaRepository.findByName("abcdef");
+        Optional<CategoryEntity> find3 = this.categoryJpaRepository.findById(find2ICategory.getId());
         ICategory find3ICategory = find3.orElse(null);
-        assertThat(find3ICategory).isNotNull();
+        assertThat(find3ICategory).isNull();
     }
 }
