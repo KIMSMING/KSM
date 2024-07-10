@@ -1,7 +1,5 @@
 package rent.rentcar.models;
 
-import java.util.ArrayList;
-
 public class VehicleServiceImpl implements VehicleService{
     @Override
     public Vehicle addVehicle() {
