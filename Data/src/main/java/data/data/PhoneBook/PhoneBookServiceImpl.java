@@ -1,5 +1,6 @@
 package data.data.PhoneBook;
 
+import data.data.Category.ICategory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,15 +39,6 @@ public class PhoneBookServiceImpl implements IPhoneBookService<IPhoneBook> {
             list.add((IPhoneBook)entity);
         }
         return list;
-    }
-
-    @Override
-    public IPhoneBook insert(String name, ECategory category, String phoneNumber, String email) throws Exception {
-        PhoneBookEntity phoneBook = PhoneBookEntity.builder()
-                .id(0L)
-                .name(name).category(category)
-                .phoneNumber(phoneNumber).email(email).build();
-        return this.insert(phoneBook);
     }
 
     @Override
@@ -109,7 +101,7 @@ public class PhoneBookServiceImpl implements IPhoneBookService<IPhoneBook> {
 
 
     @Override
-    public List<IPhoneBook> getListFromCategory(ECategory category) {
+    public List<IPhoneBook> getListFromCategory(ICategory category) {
         if ( category == null ){
             return new ArrayList<>();
         }

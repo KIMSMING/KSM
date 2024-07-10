@@ -1,5 +1,7 @@
 package data.data.PhoneBook;
 
+import data.data.Category.CategoryDto;
+import data.data.Category.ICategory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +20,7 @@ public class PhoneBookController {
     private IPhoneBookService<IPhoneBook> phoneBookService;
 
     @PostMapping
-    public ResponseEntity<IPhoneBook> insertPB(@RequestBody PhoneBookRequest dto){
+    public ResponseEntity<IPhoneBook> insert(@RequestBody PhoneBookRequest dto){
         try {
             if( dto == null ){
                 return ResponseEntity.badRequest().build();
@@ -112,12 +114,13 @@ public class PhoneBookController {
     }
 
     @GetMapping("/ct/{category}")
-    public ResponseEntity<List<IPhoneBook>> findByCategory(@PathVariable Integer category) {
+    public ResponseEntity<List<IPhoneBook>> findByCategory(@PathVariable Long category) {
         try {
             if ( category == null ) {
                 return ResponseEntity.badRequest().build();
             }
-            List<IPhoneBook> result = this.phoneBookService.getListFromCategory(ECategory.IntegerOf(category));
+            ICategory iCategory = CategoryDto.builder().id(category).build();
+            List<IPhoneBook> result = this.phoneBookService.getListFromCategory(iCategory);
             if ( result == null || result.size() <= 0 ) {
                 return ResponseEntity.notFound().build();
             }

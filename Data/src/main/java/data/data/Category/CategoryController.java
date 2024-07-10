@@ -85,7 +85,7 @@ public class CategoryController {
             if ( id == null || id <= 0 ) {
                 return ResponseEntity.badRequest().build();
             }
-            ICategory result = this.categoryService.findById(id);
+            ICategory result = (ICategory) this.categoryService.findById(id);
             if ( result == null ) {
                 return ResponseEntity.notFound().build();
             }

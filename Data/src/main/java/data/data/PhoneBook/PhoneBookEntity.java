@@ -1,6 +1,8 @@
 
 package data.data.PhoneBook;
 
+import data.data.Category.CategoryEntity;
+import data.data.Category.ICategory;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
@@ -22,7 +24,9 @@ public class PhoneBookEntity implements IPhoneBook{
     private String name;
 
     @NotNull
-    private ECategory category;
+    @ManyToOne
+    @JoinColumn(name = "categpry_id")
+    private CategoryEntity category;
 
     @NotNull
     @Column(length = 20)
@@ -38,4 +42,13 @@ public class PhoneBookEntity implements IPhoneBook{
                 , this.id, this.name, this.category, this.phoneNumber, this.email);
     }
 
+    @Override
+    public void setCategory(ICategory category) {
+        if(category == null ){
+            return;
+        }
+        CategoryEntity entity = new CategoryEntity();
+        entity.copyFields(category);
+        this.category = entity;
+    }
 }

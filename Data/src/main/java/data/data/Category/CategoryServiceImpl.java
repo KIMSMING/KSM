@@ -11,14 +11,14 @@ import java.util.Optional;
 public class CategoryServiceImpl implements ICategoryService{
 
     @Autowired
-    private CategoryJpaRepasitory categoryJpaRepasitory;
+    private CategoryJpaRepository categoryJpaRepository;
 
     @Override
     public ICategory findById(Long id) {
         if ( id == null || id <= 0 ){
             return null;
         }
-        Optional<CategoryEntity> entity = this.categoryJpaRepasitory.findById(id);
+        Optional<CategoryEntity> entity = this.categoryJpaRepository.findById(id);
         return entity.orElse(null);
     }
 
@@ -27,14 +27,14 @@ public class CategoryServiceImpl implements ICategoryService{
         if ( name == null || name.isEmpty() ){
             return null;
         }
-        Optional<CategoryEntity> entity = this.categoryJpaRepasitory.findByName(name);
+        Optional<CategoryEntity> entity = this.categoryJpaRepository.findByName(name);
         return entity.orElse(null);
     }
 
     @Override
     public List<ICategory> getAllList() {
         List<ICategory> list = this.getICategoryList(
-                this.categoryJpaRepasitory.findAll()
+                this.categoryJpaRepository.findAll()
         );
 //        List<ICategory> list = new ArrayList<>();
 //        for(ICategory entity : this.categoryJpaRepasitory.findAll()){
@@ -70,7 +70,7 @@ public class CategoryServiceImpl implements ICategoryService{
         }
         CategoryEntity entity = CategoryEntity.builder()
                         .id(0L).name(category.getName()).build();
-        CategoryEntity result = this.categoryJpaRepasitory.saveAndFlush(entity);
+        CategoryEntity result = this.categoryJpaRepository.saveAndFlush(entity);
         return result;
     }
 
@@ -81,7 +81,7 @@ public class CategoryServiceImpl implements ICategoryService{
             return false;
         }
         if (find != null) {
-            this.categoryJpaRepasitory.deleteById(id);
+            this.categoryJpaRepository.deleteById(id);
             return true;
         }
         return false;
@@ -94,7 +94,7 @@ public class CategoryServiceImpl implements ICategoryService{
             return null;
         }
         find.copyFields(category);
-        CategoryEntity result = this.categoryJpaRepasitory.saveAndFlush((CategoryEntity) find);
+        ICategory result = this.categoryJpaRepository.saveAndFlush((CategoryEntity) find);
         return result;
     }
 
@@ -104,7 +104,7 @@ public class CategoryServiceImpl implements ICategoryService{
             return null;
         }
         List<ICategory> list = this.getICategoryList(
-                this.categoryJpaRepasitory.findAllByNameContains(name)
+                this.categoryJpaRepository.findAllByNameContains(name)
         );
         return list;
     }
