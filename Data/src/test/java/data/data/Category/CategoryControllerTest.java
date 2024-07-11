@@ -59,7 +59,6 @@ public class CategoryControllerTest {
         assertThat(resultObject.getName()).isEqualTo("NoRest");
 
         //Category Delete Test
-
         ICategory delete = CategoryDto.builder().id(update.getId()).build();
         this.testRestTemplate.delete(url + "/ct/" + delete.getId(), CategoryDto.class);
         ResponseEntity<CategoryDto> deleteEntity = this.testRestTemplate.getForEntity(url + "/ct/" + insertId.toString(), CategoryDto.class);
