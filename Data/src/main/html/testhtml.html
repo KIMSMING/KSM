@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Old Title</title>
+    <link rel="stylesheet" href="/mazer/assets/compiled/css/app.css">
+    <link rel="stylesheet" href="/mazer/assets/compiled/css/app-dark.css">
+    <link rel="stylesheet" href="/mazer/assets/compiled/css/iconly.css">
+    <style>
+        #bun1 {
+            display: flex;
+            justify-content: center;
+            height: 60px;
+            margin: 0;
+        }
+
+        #bun2 {
+            display: flex;
+            justify-content: center;
+            height: 60px;
+            font-size: 200%;
+            margin: 0;
+            border-radius: 0.3rem;
+            padding-right: 60px;
+            padding-left: 60px;
+        }
+
+        ul {
+            display: flex;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #aside1 {
+            justify-content: center;
+            display: flex;
+            width: 200px;
+            height: 50px;
+            font-size: 150%;
+            float: left;
+            background: silver;
+            border-radius: 0.3rem;
+            padding-right: 2px;
+            margin-right: 2px;
+        }
+
+        #content1 {
+            justify-content: center;
+            display: flex;
+            width: 500px;
+            height: 50px;
+            font-size: 150%;
+            float: left;
+            background: silver;
+            border-radius: 0.3rem;
+        }
+
+        .float-end {
+            float: right !important;
+        }
+
+        .float-start {
+            float: left !important;
+        }
+    </style>
+</head>
+<body>
+<div id="bun1" style="border: 2px solid skyblue;">
+    <div id="bun2" style="background: silver; height:50px; width: 200px;justify-content: center;">분류 정보</div>
+</div>
+<div id ="binkan" style="border: 2px solid blue">
+    <div id="header">
+        <div id="aside1" class="col-4">
+            <span>ID</span>
+        </div>
+        <div id="content1" class="col-8">
+            <span>ID번호 정보</span>
+        </div >
+<!--    </div>-->
+<!--    <div id="border: 2px solid black">-->
+<!--    </div>-->
+</div>
+<div style="display: block"></div>
+<form id="form" name="form" method="post" action="/ctweb/oldhtml/category_old_act">
+    <span>ID</span><span>ID 정보 입력</span><br>
+    <span>이름</span><label for="name"></label><input type="text" id="name" name="name"/>
+    <input type="submit" value="검색"/>
+</form>
+
+
+<div>
+    <ul>
+        <li>
+            <span>ID</span>
+            <span>|</span>
+            <span>Name</span>
+        </li>
+    </ul>
+</div>
+<div class="float-end">
+    <button>추가</button>
+</div>
+<div class="float-start">
+    <button>뒤로</button>
+</div>
+</body>
+</html>
